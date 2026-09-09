@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Student OS
 
-## Getting Started
+Student OS is a premium student productivity dashboard built with Next.js 15, TypeScript, Tailwind CSS, Prisma, PostgreSQL, and Auth.js.
 
-First, run the development server:
+## Milestone 1: foundation
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The project currently includes the required foundation for the first milestone:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Next.js 15 App Router setup
+- TypeScript and Tailwind CSS configuration
+- Prisma schema and PostgreSQL environment variables
+- Auth.js credentials authentication configuration
+- Responsive app shell with sidebar, sticky top navigation, and mobile behavior
+- Light/dark mode support with `next-themes`
+- Reusable UI primitives for buttons, cards, inputs, badges, and page headers
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `app/` — route entry points, Auth.js routes, and global layout
+- `components/` — reusable UI primitives and layout pieces
+- `features/` — future domain modules for courses, assignments, notes, schedule, and expenses
+- `lib/` — shared infrastructure and Prisma utilities
+- `prisma/` — Prisma schema and database configuration
+- `hooks/` — client-side hooks for behavior like mobile nav state
+- `types/` — shared TypeScript definitions for future growth
 
-## Learn More
+## Local environment
 
-To learn more about Next.js, take a look at the following resources:
+1. Copy `.env.example` to `.env`.
+2. Replace the placeholder values with your local PostgreSQL and auth settings.
+3. Create or start a PostgreSQL database.
+4. Run `npx prisma generate`.
+5. Run `npm run dev`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Commands
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `npm run dev`
+- `npm run build`
+- `npm run lint`
+- `npx prisma generate`
+- `npx prisma studio`
 
-## Deploy on Vercel
+## Environment variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `DATABASE_URL`
+- `NEXTAUTH_URL`
+- `NEXTAUTH_SECRET`
+- `AUTH_SECRET`
