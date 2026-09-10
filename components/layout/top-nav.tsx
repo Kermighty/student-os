@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Bell, Search, Sparkles } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 
@@ -32,10 +33,10 @@ export function TopNav({ onMenuOpen }: TopNavProps) {
             <Sparkles className="h-4 w-4" />
           </Button>
 
-          <div className="hidden items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 md:flex">
+          <Link href="/search" className="hidden items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 md:flex" aria-label="Open global search">
             <Search className="h-3.5 w-3.5" />
             Quick search
-          </div>
+          </Link>
         </div>
 
         <div className="flex items-center gap-2">

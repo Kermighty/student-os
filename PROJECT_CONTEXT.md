@@ -44,7 +44,7 @@ The repository uses a feature-first structure:
 
 - `app/` — Next.js App Router routes, layouts, pages, and API route handlers.
 - `components/` — Shared UI, authentication components, layout pieces, and providers.
-- `features/` — Domain-specific modules. The implemented modules currently include dashboard, courses, assignments, notes, schedule, and expenses.
+- `features/` — Domain-specific modules. The implemented modules currently include dashboard, courses, assignments, notes, schedule, expenses, analytics, search, and settings.
 - `lib/` — Shared infrastructure and utilities, including the Prisma client.
 - `prisma/` — Prisma schema and database migrations.
 - `hooks/` — Reusable client-side hooks, including mobile navigation behavior.
@@ -213,11 +213,20 @@ The following models are **planned** and are not implemented in the current data
 - Added transaction create, detail, edit, delete, currency formatting, validation, and success feedback.
 - Replaced dashboard mock finance values with live monthly statistics and three recent transactions.
 
+### Sprint 09 — Intelligence & Polish
+
+- Added unified authenticated search across courses, assignments, notes, schedule events, and expenses.
+- Added real-data Analytics with academic completion, productivity activity, and monthly finance summaries.
+- Added functional Settings for profile name, password changes, theme selection, local JSON export, and confirmed account deletion.
+- Added reusable server-side search, analytics, and export data helpers to reduce duplicated queries.
+- Added global loading and error boundaries and consistent empty states across the new surfaces.
+- Preserved keyboard-friendly controls, ARIA labels, live status messages, text-plus-color indicators, and dark mode.
+
 ## Current State
 
-Sprint 08 is complete.
+Sprint 09 is complete.
 
-The next development milestone is **Sprint 09 — Analytics**. Analytics remain planned work; Sprint 08's finance summaries are limited to the Expenses feature.
+The next development milestone is **Sprint 10 — Polish & Deployment**. Deployment work remains planned and was not implemented in Sprint 09.
 
 ## Roadmap
 
@@ -231,8 +240,8 @@ The next development milestone is **Sprint 09 — Analytics**. Analytics remain 
 | 06 Notes | Complete |
 | 07 Schedule | Complete |
 | 08 Expenses | Complete |
-| 09 Analytics | Next |
-| 10 Polish & Deployment | Planned |
+| 09 Analytics | Complete |
+| 10 Polish & Deployment | Next |
 
 ## Engineering Standards
 

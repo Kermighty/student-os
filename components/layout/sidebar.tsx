@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CalendarRange, ChartNoAxesCombined, FileText, GraduationCap, LayoutGrid, NotebookPen, Settings, Wallet } from "lucide-react";
+import { CalendarRange, ChartNoAxesCombined, FileText, GraduationCap, LayoutGrid, NotebookPen, Search, Settings, Wallet } from "lucide-react";
 
 const items = [
   { href: "/", label: "Overview", icon: LayoutGrid },
@@ -10,6 +10,8 @@ const items = [
   { href: "/expenses", label: "Expenses", icon: Wallet },
   { href: "/settings", label: "Settings", icon: Settings },
   { href: "/reports", label: "Reports", icon: ChartNoAxesCombined },
+  { href: "/analytics", label: "Analytics", icon: ChartNoAxesCombined },
+  { href: "/search", label: "Search", icon: Search },
 ];
 
 export function Sidebar() {
