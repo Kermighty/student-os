@@ -43,3 +43,33 @@ body {
 * {
   border-color: var(--border);
 }
+
+@media print {
+  body:has(.reports-workspace) {
+    background: white !important;
+    color: #0f172a !important;
+  }
+
+  body:has(.reports-workspace) header,
+  body:has(.reports-workspace) aside,
+  body:has(.reports-workspace) .reports-toolbar,
+  body:has(.reports-workspace) .reports-workspace > p {
+    display: none !important;
+  }
+
+  body:has(.reports-workspace) main {
+    padding: 0 !important;
+  }
+
+  body:has(.reports-workspace) .reports-workspace {
+    max-width: none !important;
+    padding: 0.5in !important;
+  }
+
+  body:has(.reports-workspace) .report-card {
+    break-inside: avoid;
+    border-color: #cbd5e1 !important;
+    box-shadow: none !important;
+    color: #0f172a !important;
+  }
+}

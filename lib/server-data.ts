@@ -69,3 +69,48 @@ export async function exportUserData(userId: string) {
   ]);
   return { exportedAt: new Date().toISOString(), user, courses, assignments, notes, scheduleEvents, categories, expenses };
 }
+
+export async function getReportsData(userId: string, now = new Date()) {
+  const analytics = await getAnalyticsData(userId, now);
+
+  const [totalCourses, notesCount, scheduleEvents, expensesCount, weeklyEvents] = await Promise.all([
+    prisma.course.count({ where: { userId } }),
+    prisma.note.count({ where: { userId } }),
+    prisma.scheduleEvent.count({ where: { userId } }),
+    prisma.expense.count({ where: { userId } }),
+    prisma.scheduleEvent.findMany({ where: { userId, eventType: { in: ["CLASS", "STUDY"] } }, select: { eventType: true } }),
+  ]);
+
+  const classesAttended = weeklyEvents.filter((event) => event.eventType === "CLASS").length;
+  const weeklyActivityScore = Math.min(100, analytics.weeklyAssignments * 10 + analytics.notesThisMonth * 5 + analytics.studySessions * 10 + classesAttended * 5);
+
+  return {
+    academic: {
+      totalCourses,
+      totalAssignments: analytics.totalAssignments,
+      completedAssignments: analytics.completedAssignments,
+      pendingAssignments: analytics.pendingAssignments,
+      completionRate: analytics.completionRate,
+      mostDemandingCourse: analytics.mostDemandingCourse,
+    },
+    productivity: {
+      studySessions: analytics.studySessions,
+      classesAttended,
+      notesCreated: notesCount,
+      weeklyActivityScore,
+    },
+    finance: {
+      income: analytics.income,
+      spending: analytics.spending,
+      savings: analytics.savings,
+      topSpendingCategory: analytics.topSpendingCategory,
+    },
+    overview: {
+      courses: totalCourses,
+      assignments: analytics.totalAssignments,
+      notes: notesCount,
+      scheduleEvents,
+      expenses: expensesCount,
+    },
+  };
+}
