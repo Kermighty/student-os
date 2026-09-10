@@ -1,11 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Sidebar } from "@/components/layout/sidebar";
 import { TopNav } from "@/components/layout/top-nav";
 import { useMobileNav } from "@/hooks/use-mobile-nav";
+import { navigationItems } from "@/components/layout/navigation";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const { isOpen, close, open } = useMobileNav();
@@ -34,23 +36,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </Button>
             </div>
             <div className="space-y-1.5">
-              {[
-                { href: "/", label: "Overview" },
-                { href: "/courses", label: "Courses" },
-                { href: "/assignments", label: "Assignments" },
-                { href: "/notes", label: "Notes" },
-                { href: "/schedule", label: "Schedule" },
-                { href: "/expenses", label: "Expenses" },
-                { href: "/settings", label: "Settings" },
-              ].map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="flex items-center rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
-                  onClick={close}
-                >
-                  {item.label}
-                </a>
+              {navigationItems.map(({ href, label, icon: Icon }) => (
+                <Link key={href} href={href} className="flex min-h-11 items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white" onClick={close}>
+                  <Icon className="h-4 w-4" />
+                  {label}
+                </Link>
               ))}
             </div>
           </div>
