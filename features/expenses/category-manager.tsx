@@ -1,0 +1,18 @@
+"use client";
+
+import { useState } from "react";
+import { Plus } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { categoryColors } from "@/features/expenses/expense-schema";
+import type { ExpenseCategoryRecord } from "@/features/expenses/expense-types";
+
+export function CategoryManager({ initialCategories, onCreated }: { initialCategories: ExpenseCategoryRecord[]; onCreated: (category: ExpenseCategoryRecord) => void }) {
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [color, setColor] = useState<(typeof categoryColors)[number]>("blue");
+  const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
+  const submit = async (event: React.FormEvent) => { event.preventDefault(); setSaving(true); setError(""); const response = await fetch("/api/expense-categories", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, color }) }); const payload = await response.json(); setSaving(false); if (!response.ok) { setError(payload.error ?? "Unable to create category."); return; } onCreated(payload.category); setName(""); setOpen(false); };
+  return <div className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_10px_30px_rgba(15,23,42,0.04)] dark:border-slate-800 dark:bg-slate-900"><div className="flex items-center justify-between gap-3"><div><p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">Categories</p><h2 className="mt-1 text-lg font-semibold text-slate-900 dark:text-white">Organize your money</h2></div><Button type="button" variant="secondary" size="sm" onClick={() => setOpen(!open)}><Plus className="h-4 w-4" />New category</Button></div>{open ? <form className="mt-4 space-y-3 border-t border-slate-200 pt-4 dark:border-slate-800" onSubmit={submit}><label className="block text-sm font-medium text-slate-700 dark:text-slate-200">Name<input value={name} onChange={(event) => setName(event.target.value)} required minLength={2} maxLength={60} className="mt-2 h-10 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 text-sm dark:border-slate-700 dark:bg-slate-950" /></label><label className="block text-sm font-medium text-slate-700 dark:text-slate-200">Color<select value={color} onChange={(event) => setColor(event.target.value as typeof color)} className="mt-2 h-10 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 text-sm dark:border-slate-700 dark:bg-slate-950">{categoryColors.map((option) => <option key={option} value={option}>{option}</option>)}</select></label>{error ? <p role="alert" className="text-xs text-rose-600">{error}</p> : null}<div className="flex justify-end"><Button type="submit" size="sm" disabled={saving}>{saving ? "Creating..." : "Create category"}</Button></div></form> : null}<div className="mt-4 flex flex-wrap gap-2">{initialCategories.map((category) => <span key={category.id} className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-2.5 py-1 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300"><span className={`h-2 w-2 rounded-full ${category.color === "orange" ? "bg-orange-500" : category.color === "blue" ? "bg-blue-500" : category.color === "emerald" ? "bg-emerald-500" : category.color === "violet" ? "bg-violet-500" : category.color === "rose" ? "bg-rose-500" : category.color === "green" ? "bg-green-500" : "bg-slate-500"}`} />{category.name}</span>)}</div></div>;
+}

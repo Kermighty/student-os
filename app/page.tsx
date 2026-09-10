@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { AppShell } from "@/components/layout/app-shell";
 import { authOptions } from "@/auth";
 import { DashboardPage } from "@/features/dashboard/dashboard-page";
+import { serializeExpense } from "@/features/expenses/expense-data";
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
@@ -16,7 +17,9 @@ export default async function Home() {
   }
 
   const today = new Date().getDay() || 7;
-  const [pendingAssignments, completedAssignments, upcomingAssignments, recentNotes, todaySchedule] = await Promise.all([
+  const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+  const nextMonthStart = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 1);
+  const [pendingAssignments, completedAssignments, upcomingAssignments, recentNotes, todaySchedule, monthlyExpenses, recentExpenses] = await Promise.all([
     prisma.assignment.count({ where: { userId: session.user.id, status: { not: "COMPLETED" } } }),
     prisma.assignment.count({ where: { userId: session.user.id, status: "COMPLETED" } }),
     prisma.assignment.findMany({
@@ -35,6 +38,16 @@ export default async function Home() {
       where: { userId: session.user.id, dayOfWeek: today },
       include: { course: { select: { id: true, courseCode: true, title: true, color: true } } },
       orderBy: { startTime: "asc" },
+    }),
+    prisma.expense.findMany({
+      where: { userId: session.user.id, transactionDate: { gte: monthStart, lt: nextMonthStart } },
+      include: { category: true },
+    }),
+    prisma.expense.findMany({
+      where: { userId: session.user.id },
+      include: { category: true },
+      orderBy: { transactionDate: "desc" },
+      take: 3,
     }),
   ]);
 
@@ -59,6 +72,11 @@ export default async function Home() {
           createdAt: event.createdAt.toISOString(),
           updatedAt: event.updatedAt.toISOString(),
         }))}
+        financeSummary={{
+          expenses: monthlyExpenses.filter((expense) => expense.type === "EXPENSE").reduce((sum, expense) => sum + Number(expense.amount), 0),
+          income: monthlyExpenses.filter((expense) => expense.type === "INCOME").reduce((sum, expense) => sum + Number(expense.amount), 0),
+        }}
+        recentExpenses={recentExpenses.map(serializeExpense)}
       />
     </AppShell>
   );

@@ -44,7 +44,7 @@ The repository uses a feature-first structure:
 
 - `app/` — Next.js App Router routes, layouts, pages, and API route handlers.
 - `components/` — Shared UI, authentication components, layout pieces, and providers.
-- `features/` — Domain-specific modules. The implemented modules currently include dashboard, courses, assignments, notes, and schedule.
+- `features/` — Domain-specific modules. The implemented modules currently include dashboard, courses, assignments, notes, schedule, and expenses.
 - `lib/` — Shared infrastructure and utilities, including the Prisma client.
 - `prisma/` — Prisma schema and database migrations.
 - `hooks/` — Reusable client-side hooks, including mobile navigation behavior.
@@ -111,13 +111,26 @@ Each `Note` belongs to exactly one `User`. A note may optionally belong to one `
 
 Each `ScheduleEvent` belongs to exactly one `User` and may optionally belong to one `Course`. Deleting a linked course clears the course link. Schedule events are indexed by user, course, day, and start time.
 
+### Expense and ExpenseCategory
+
+`ExpenseCategory` stores user-owned built-in and custom categories with a name, color, and creation timestamp. Each category can contain many expenses.
+
+`Expense` stores personal finance transactions with:
+
+- Title and precise `Decimal(10,2)` amount
+- `EXPENSE` or `INCOME` transaction type
+- Required user-owned category
+- Transaction date, payment method, notes, and timestamps
+
+Every expense belongs to exactly one `User` and one `ExpenseCategory`. Category deletion is restricted while transactions use it. User, category, and transaction-date indexes support finance queries.
+
 The authentication models `Account`, `Session`, and `VerificationToken` are also present for Auth.js persistence and session support.
 
 ### Planned Models
 
 The following models are **planned** and are not implemented in the current database schema:
 
-- **Expense** — planned
+- **Analytics** — planned as a future product area; current expense summaries are implemented within the Expenses feature.
 
 ## Completed Sprints
 
@@ -190,11 +203,21 @@ The following models are **planned** and are not implemented in the current data
 - Added server-side conflict detection that blocks overlapping events on the same day.
 - Replaced the dashboard's mock Today’s Schedule widget with live events for the authenticated user's current weekday.
 
+### Sprint 08 — Expense & Budget Management System
+
+- Added PostgreSQL persistence for precise income and expense transactions.
+- Added user-owned built-in and custom expense categories with category colors.
+- Added secure Expense and ExpenseCategory CRUD APIs with ownership validation.
+- Added monthly finance dashboard with balance, income, expenses, filters, search, and sorting.
+- Added pure CSS category breakdown bars and spending summary calculations from PostgreSQL data.
+- Added transaction create, detail, edit, delete, currency formatting, validation, and success feedback.
+- Replaced dashboard mock finance values with live monthly statistics and three recent transactions.
+
 ## Current State
 
-Sprint 07 is complete.
+Sprint 08 is complete.
 
-The next development milestone is **Sprint 08 — Expenses**. Expenses are planned work and are not currently implemented as a database-backed feature.
+The next development milestone is **Sprint 09 — Analytics**. Analytics remain planned work; Sprint 08's finance summaries are limited to the Expenses feature.
 
 ## Roadmap
 
@@ -207,8 +230,8 @@ The next development milestone is **Sprint 08 — Expenses**. Expenses are plann
 | 05 Assignments | Complete |
 | 06 Notes | Complete |
 | 07 Schedule | Complete |
-| 08 Expenses | Next |
-| 09 Analytics | Planned |
+| 08 Expenses | Complete |
+| 09 Analytics | Next |
 | 10 Polish & Deployment | Planned |
 
 ## Engineering Standards
