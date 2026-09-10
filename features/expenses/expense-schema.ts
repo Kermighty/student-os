@@ -33,7 +33,7 @@ export type ExpenseFormValues = z.infer<typeof expenseSchema>;
 export type CategoryFormValues = z.infer<typeof categorySchema>;
 
 export function formatCurrency(amount: number | string) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(Number(amount));
+  return new Intl.NumberFormat("en-PH", { style: "currency", currency: "PHP" }).format(Number(amount));
 }
 
 export function formatExpenseDate(value: Date | string) {

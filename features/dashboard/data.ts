@@ -25,9 +25,9 @@ export const statCards = [
   },
   {
     label: "Monthly Expenses",
-    value: "$482",
+    value: "Live",
     description: "Budget on track",
-    trend: "-$28 vs target",
+    trend: "Live from PostgreSQL",
     icon: "Wallet",
     tone: "violet",
   },
