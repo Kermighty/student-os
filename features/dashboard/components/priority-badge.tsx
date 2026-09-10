@@ -1,9 +1,9 @@
-import type { AssignmentPriority } from "@/features/dashboard/data";
+type AssignmentPriority = "High" | "Medium" | "Low";
 
 const styles: Record<AssignmentPriority, string> = {
   High: "bg-rose-100 text-rose-700 ring-rose-200 dark:bg-rose-500/10 dark:text-rose-200 dark:ring-rose-500/20",
   Medium: "bg-amber-100 text-amber-700 ring-amber-200 dark:bg-amber-500/10 dark:text-amber-200 dark:ring-amber-500/20",
-  Low: "bg-emerald-100 text-emerald-700 ring-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-200 dark:ring-emerald-500/20",
+  Low: "bg-slate-100 text-slate-600 ring-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:ring-slate-700",
 };
 
 export function PriorityBadge({ priority }: { priority: AssignmentPriority }) {

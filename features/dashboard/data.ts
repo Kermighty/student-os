@@ -1,15 +1,3 @@
-export type AssignmentPriority = "High" | "Medium" | "Low";
-
-export type Assignment = {
-  id: string;
-  courseCode: string;
-  title: string;
-  dueDate: string;
-  priority: AssignmentPriority;
-  color: string;
-  completed: boolean;
-};
-
 export type ScheduleBlockItem = {
   id: string;
   start: string;
@@ -64,45 +52,6 @@ export const statCards = [
     tone: "violet",
   },
 ] as const;
-
-export const assignments: Assignment[] = [
-  {
-    id: "a1",
-    courseCode: "CS 301",
-    title: "Systems Design proposal",
-    dueDate: "Today • 5:00 PM",
-    priority: "High",
-    color: "bg-rose-500",
-    completed: false,
-  },
-  {
-    id: "a2",
-    courseCode: "MTH 220",
-    title: "Calculus problem set 7",
-    dueDate: "Tomorrow • 9:30 AM",
-    priority: "Medium",
-    color: "bg-amber-500",
-    completed: false,
-  },
-  {
-    id: "a3",
-    courseCode: "BIO 110",
-    title: "Lab reflection summary",
-    dueDate: "Thu • 2:00 PM",
-    priority: "Low",
-    color: "bg-emerald-500",
-    completed: true,
-  },
-  {
-    id: "a4",
-    courseCode: "ENG 210",
-    title: "Research bibliography review",
-    dueDate: "Fri • 11:00 AM",
-    priority: "Medium",
-    color: "bg-sky-500",
-    completed: false,
-  },
-];
 
 export const schedule: ScheduleBlockItem[] = [
   {

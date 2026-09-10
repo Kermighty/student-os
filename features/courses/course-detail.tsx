@@ -82,13 +82,16 @@ export function CourseDetail({ course }: { course: CourseDetailRecord }) {
           </Card>
 
           <div className="grid gap-4 md:grid-cols-3">
-            {[{ label: "Assignments", icon: BookOpen, text: "Coming in future sprint" }, { label: "Notes", icon: NotebookPen, text: "Coming in future sprint" }, { label: "Schedule", icon: CalendarDays, text: "Coming in future sprint" }].map(({ label, icon: Icon, text }) => (
+            <Link href="/assignments" className="block">
+              <Card className="rounded-[24px] p-4 transition hover:-translate-y-0.5 hover:shadow-md dark:bg-slate-900">
+                <div className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300"><BookOpen className="h-4 w-4" />Assignments</div>
+                <p className="mt-3 text-sm text-blue-600 dark:text-blue-300">Open assignment workspace</p>
+              </Card>
+            </Link>
+            {[{ label: "Notes", icon: NotebookPen }, { label: "Schedule", icon: CalendarDays }].map(({ label, icon: Icon }) => (
               <Card key={label} className="rounded-[24px] p-4 dark:bg-slate-900">
-                <div className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300">
-                  <Icon className="h-4 w-4" />
-                  {label}
-                </div>
-                <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">{text}</p>
+                <div className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300"><Icon className="h-4 w-4" />{label}</div>
+                <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">Planned for a future sprint</p>
               </Card>
             ))}
           </div>

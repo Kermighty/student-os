@@ -15,10 +15,13 @@ import { NotePreviewCard } from "@/features/dashboard/components/note-preview-ca
 import { ProgressRing } from "@/features/dashboard/components/progress-ring";
 import { ScheduleTimeline } from "@/features/dashboard/components/schedule-timeline";
 import { StatCard } from "@/features/dashboard/components/stat-card";
-import { assignments, notes, schedule, statCards } from "@/features/dashboard/data";
+import { notes, schedule, statCards } from "@/features/dashboard/data";
+import type { AssignmentRecord } from "@/features/assignments/assignment-types";
 
 interface DashboardPageProps {
   name: string;
+  assignmentSummary: { pending: number; completed: number };
+  upcomingAssignments: AssignmentRecord[];
 }
 
 function getGreeting(date: Date) {
@@ -40,7 +43,7 @@ function getIcon(name: string) {
   return icons[name as keyof typeof icons] ?? BookOpen;
 }
 
-export function DashboardPage({ name }: DashboardPageProps) {
+export function DashboardPage({ name, assignmentSummary, upcomingAssignments }: DashboardPageProps) {
   const today = new Date();
   const greeting = getGreeting(today);
   const todayLabel = new Intl.DateTimeFormat("en-US", {
@@ -53,8 +56,15 @@ export function DashboardPage({ name }: DashboardPageProps) {
     <div className="space-y-6 pb-8">
       <DashboardHeader name={name} greeting={greeting} todayLabel={todayLabel} />
 
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {statCards.map((card) => {
+      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+        {[...statCards.map((card) => card.label === "Pending Assignments" ? { ...card, value: String(assignmentSummary.pending), description: `${assignmentSummary.pending === 1 ? "1 assignment" : `${assignmentSummary.pending} assignments`} still in progress`, trend: "Live from PostgreSQL" } : card), {
+          label: "Completed Assignments",
+          value: String(assignmentSummary.completed),
+          description: "Finished assignments",
+          trend: "Live from PostgreSQL",
+          icon: "ClipboardList",
+          tone: "emerald" as const,
+        }].map((card) => {
           const Icon = getIcon(card.icon);
 
           return (
@@ -89,9 +99,9 @@ export function DashboardPage({ name }: DashboardPageProps) {
             </div>
 
             <div className="mt-5">
-              {assignments.length > 0 ? (
+              {upcomingAssignments.length > 0 ? (
                 <ul className="space-y-3">
-                  {assignments.map((item) => (
+                  {upcomingAssignments.map((item) => (
                     <AssignmentItem key={item.id} item={item} />
                   ))}
                 </ul>

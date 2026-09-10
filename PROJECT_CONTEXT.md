@@ -75,13 +75,24 @@ The database uses Prisma with PostgreSQL. The implemented schema contains the fo
 
 Each `Course` belongs to exactly one `User` through `userId`. A `User` can own many courses. The relationship is enforced by a foreign key with cascade deletion, and courses are indexed by `userId`.
 
+### Assignment
+
+`Assignment` stores authenticated-user work linked to an existing course:
+
+- Title and description
+- Due date
+- Priority: `LOW`, `MEDIUM`, or `HIGH`
+- Status: `TODO`, `IN_PROGRESS`, or `COMPLETED`
+- Creation and update timestamps
+
+Each `Assignment` belongs to exactly one `User` and one `Course`. Users can own many assignments, and courses can contain many assignments. Both relationships use cascade deletion, and assignment queries are indexed by user, course, and due date.
+
 The authentication models `Account`, `Session`, and `VerificationToken` are also present for Auth.js persistence and session support.
 
 ### Planned Models
 
 The following models are **planned** and are not implemented in the current database schema:
 
-- **Assignment** — planned
 - **Note** — planned
 - **ScheduleEvent** — planned
 - **Expense** — planned
@@ -127,11 +138,21 @@ The following models are **planned** and are not implemented in the current data
 - Added secure API routes that require authentication and verify course ownership for reads, updates, and deletes.
 - Added course validation with Zod and reusable course UI components.
 
+### Sprint 05 — Assignments Management System
+
+- Added PostgreSQL persistence for assignments through Prisma.
+- Added secure Assignment CRUD API routes with authenticated ownership checks.
+- Added course-linked assignment creation, detail, editing, and permanent deletion.
+- Added Zod validation, React Hook Form, inline errors, loading states, success feedback, and unsaved-change protection.
+- Added immediate search, course/status/priority filters, and due-date/priority/recent sorting.
+- Added assignment cards with course color strips, priority badges, status pills, due dates, and completion controls.
+- Replaced the dashboard's mock assignment feed and assignment statistics with live PostgreSQL data.
+
 ## Current State
 
-Sprint 04 is complete.
+Sprint 05 is complete.
 
-The next development milestone is **Sprint 05 — Assignments Management System**. Assignment management is planned work and is not currently implemented as a database-backed feature.
+The next development milestone is **Sprint 06 — Notes**. Notes are planned work and are not currently implemented as a database-backed feature.
 
 ## Roadmap
 
@@ -141,8 +162,8 @@ The next development milestone is **Sprint 05 — Assignments Management System*
 | 02 Authentication | Complete |
 | 03 Dashboard | Complete |
 | 04 Courses | Complete |
-| 05 Assignments | Next |
-| 06 Notes | Planned |
+| 05 Assignments | Complete |
+| 06 Notes | Next |
 | 07 Schedule | Planned |
 | 08 Expenses | Planned |
 | 09 Analytics | Planned |
