@@ -16,8 +16,29 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Student OS",
-  description: "A premium student life dashboard.",
+  title: {
+    default: "Student OS — Premium Student Productivity Platform",
+    template: "%s | Student OS",
+  },
+  description: "Student OS is a premium productivity platform for college students to manage courses, assignments, notes, schedules, expenses, and progress.",
+  applicationName: "Student OS",
+  generator: "Next.js",
+  keywords: ["student productivity", "college planner", "assignments", "notes", "schedule", "student finance"],
+  authors: [{ name: "Kermighty" }],
+  openGraph: {
+    type: "website",
+    title: "Student OS — Premium Student Productivity Platform",
+    description: "A premium productivity platform for college students.",
+    siteName: "Student OS",
+  },
+  twitter: {
+    card: "summary",
+    title: "Student OS — Premium Student Productivity Platform",
+    description: "A premium productivity platform for college students.",
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

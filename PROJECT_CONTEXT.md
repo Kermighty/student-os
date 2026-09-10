@@ -222,11 +222,20 @@ The following models are **planned** and are not implemented in the current data
 - Added global loading and error boundaries and consistent empty states across the new surfaces.
 - Preserved keyboard-friendly controls, ARIA labels, live status messages, text-plus-color indicators, and dark mode.
 
+### Sprint 10 — Production Deployment & Portfolio Release
+
+- Added a safe `.env.example` for local PostgreSQL, Neon, Auth.js, and Vercel configuration.
+- Added explicit Prisma generation, migration deployment, and Vercel build scripts.
+- Replaced the foundation README with portfolio-quality installation, feature, architecture, environment, and deployment documentation.
+- Added MIT licensing, contribution guidelines, and a community code of conduct.
+- Improved browser metadata, Open Graph metadata, Twitter metadata, keywords, authorship, and favicon declaration.
+- Verified Prisma generation, migration status, lint, and production build.
+
 ## Current State
 
-Sprint 09 is complete.
+Sprint 10 is complete.
 
-The next development milestone is **Sprint 10 — Polish & Deployment**. Deployment work remains planned and was not implemented in Sprint 09.
+Student OS is feature complete and prepared for a manual Vercel Hobby plus Neon PostgreSQL deployment. Deployment itself was intentionally not performed in this sprint.
 
 ## Roadmap
 
@@ -241,7 +250,7 @@ The next development milestone is **Sprint 10 — Polish & Deployment**. Deploym
 | 07 Schedule | Complete |
 | 08 Expenses | Complete |
 | 09 Analytics | Complete |
-| 10 Polish & Deployment | Next |
+| 10 Polish & Deployment | Complete |
 
 ## Engineering Standards
 
