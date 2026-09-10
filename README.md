@@ -25,7 +25,7 @@ Screenshots can be added as the project is prepared for its public demo.
 
 ### Login
 
-_Screenshot placeholder_
+<img width="1049" height="739" alt="image" src="https://github.com/user-attachments/assets/cdf2e04a-2790-4a68-b109-f60465c5fcc8" />
 
 ### Dashboard
 
