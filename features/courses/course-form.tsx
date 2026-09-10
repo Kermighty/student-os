@@ -40,6 +40,8 @@ export function CourseForm({ mode, defaultValues, courseId }: CourseFormProps) {
     },
   });
 
+  // React Hook Form's watch API is intentionally used here to keep the color preview live.
+  // eslint-disable-next-line react-hooks/incompatible-library
   const selectedColor = watch("color");
   const selectedSwatch = useMemo(
     () => courseColorOptions.find((option) => option.value === selectedColor)?.swatch ?? "#2563EB",

@@ -8,16 +8,6 @@ export type ScheduleBlockItem = {
   color: string;
 };
 
-export type NoteItem = {
-  id: string;
-  title: string;
-  preview: string;
-  updatedAt: string;
-  pinned: boolean;
-  course: string;
-  accent: string;
-};
-
 export const statCards = [
   {
     label: "Active Courses",
@@ -89,45 +79,6 @@ export const schedule: ScheduleBlockItem[] = [
     room: "Library North",
     instructor: "Peer Circle",
     color: "bg-amber-500",
-  },
-];
-
-export const notes: NoteItem[] = [
-  {
-    id: "n1",
-    title: "Algorithms revision map",
-    preview: "Break down sorting complexity and map the patterns that show up in weekly quizzes.",
-    updatedAt: "2h ago",
-    pinned: true,
-    course: "CS 301",
-    accent: "from-blue-500/20 via-blue-500/5 to-transparent",
-  },
-  {
-    id: "n2",
-    title: "Lab experiment questions",
-    preview: "Double-check the variable control list and color-code the observations before Friday.",
-    updatedAt: "Yesterday",
-    pinned: false,
-    course: "BIO 110",
-    accent: "from-emerald-500/20 via-emerald-500/5 to-transparent",
-  },
-  {
-    id: "n3",
-    title: "Essay outline draft",
-    preview: "Lead with a clear thesis, then anchor each paragraph to the historical evidence list.",
-    updatedAt: "2 days ago",
-    pinned: true,
-    course: "ENG 210",
-    accent: "from-violet-500/20 via-violet-500/5 to-transparent",
-  },
-  {
-    id: "n4",
-    title: "Study plan checklist",
-    preview: "Complete the calculus drill set before the scheduled review session and gather flashcards.",
-    updatedAt: "3 days ago",
-    pinned: false,
-    course: "MTH 220",
-    accent: "from-amber-500/20 via-amber-500/5 to-transparent",
   },
 ];
 

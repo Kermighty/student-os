@@ -15,13 +15,19 @@ export default async function Home() {
     redirect("/login");
   }
 
-  const [pendingAssignments, completedAssignments, upcomingAssignments] = await Promise.all([
+  const [pendingAssignments, completedAssignments, upcomingAssignments, recentNotes] = await Promise.all([
     prisma.assignment.count({ where: { userId: session.user.id, status: { not: "COMPLETED" } } }),
     prisma.assignment.count({ where: { userId: session.user.id, status: "COMPLETED" } }),
     prisma.assignment.findMany({
       where: { userId: session.user.id, status: { not: "COMPLETED" } },
       include: { course: { select: { id: true, courseCode: true, title: true, color: true } } },
       orderBy: { dueDate: "asc" },
+      take: 4,
+    }),
+    prisma.note.findMany({
+      where: { userId: session.user.id },
+      include: { course: { select: { id: true, courseCode: true, title: true, color: true } } },
+      orderBy: [{ pinned: "desc" }, { updatedAt: "desc" }],
       take: 4,
     }),
   ]);
@@ -36,6 +42,11 @@ export default async function Home() {
           dueDate: assignment.dueDate.toISOString(),
           createdAt: assignment.createdAt.toISOString(),
           updatedAt: assignment.updatedAt.toISOString(),
+        }))}
+        recentNotes={recentNotes.map((note) => ({
+          ...note,
+          createdAt: note.createdAt.toISOString(),
+          updatedAt: note.updatedAt.toISOString(),
         }))}
       />
     </AppShell>

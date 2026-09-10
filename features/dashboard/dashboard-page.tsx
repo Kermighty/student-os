@@ -15,13 +15,16 @@ import { NotePreviewCard } from "@/features/dashboard/components/note-preview-ca
 import { ProgressRing } from "@/features/dashboard/components/progress-ring";
 import { ScheduleTimeline } from "@/features/dashboard/components/schedule-timeline";
 import { StatCard } from "@/features/dashboard/components/stat-card";
-import { notes, schedule, statCards } from "@/features/dashboard/data";
+import { schedule, statCards } from "@/features/dashboard/data";
 import type { AssignmentRecord } from "@/features/assignments/assignment-types";
+import type { NoteRecord } from "@/features/notes/note-types";
+import Link from "next/link";
 
 interface DashboardPageProps {
   name: string;
   assignmentSummary: { pending: number; completed: number };
   upcomingAssignments: AssignmentRecord[];
+  recentNotes: NoteRecord[];
 }
 
 function getGreeting(date: Date) {
@@ -43,7 +46,7 @@ function getIcon(name: string) {
   return icons[name as keyof typeof icons] ?? BookOpen;
 }
 
-export function DashboardPage({ name, assignmentSummary, upcomingAssignments }: DashboardPageProps) {
+export function DashboardPage({ name, assignmentSummary, upcomingAssignments, recentNotes }: DashboardPageProps) {
   const today = new Date();
   const greeting = getGreeting(today);
   const todayLabel = new Intl.DateTimeFormat("en-US", {
@@ -133,18 +136,15 @@ export function DashboardPage({ name, assignmentSummary, upcomingAssignments }: 
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Workspace</p>
                 <h2 className="mt-1 text-xl font-semibold text-slate-900 dark:text-white">Recent notes</h2>
               </div>
-              <button
-                type="button"
-                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-600 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
-              >
+              <Link href="/notes" className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-600 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700">
                 Open notes
-              </button>
+              </Link>
             </div>
 
             <div className="mt-5 grid gap-4 md:grid-cols-2">
-              {notes.map((note) => (
+              {recentNotes.length > 0 ? recentNotes.map((note) => (
                 <NotePreviewCard key={note.id} note={note} />
-              ))}
+              )) : <div className="md:col-span-2"><EmptyState /></div>}
             </div>
           </section>
         </div>

@@ -44,7 +44,7 @@ The repository uses a feature-first structure:
 
 - `app/` — Next.js App Router routes, layouts, pages, and API route handlers.
 - `components/` — Shared UI, authentication components, layout pieces, and providers.
-- `features/` — Domain-specific modules. The implemented modules currently include dashboard and courses.
+- `features/` — Domain-specific modules. The implemented modules currently include dashboard, courses, assignments, and notes.
 - `lib/` — Shared infrastructure and utilities, including the Prisma client.
 - `prisma/` — Prisma schema and database migrations.
 - `hooks/` — Reusable client-side hooks, including mobile navigation behavior.
@@ -87,13 +87,23 @@ Each `Course` belongs to exactly one `User` through `userId`. A `User` can own m
 
 Each `Assignment` belongs to exactly one `User` and one `Course`. Users can own many assignments, and courses can contain many assignments. Both relationships use cascade deletion, and assignment queries are indexed by user, course, and due date.
 
+### Note
+
+`Note` stores a student's personal or course-specific writing:
+
+- Title and content
+- Optional course link
+- Pinned state
+- Creation and update timestamps
+
+Each `Note` belongs to exactly one `User`. A note may optionally belong to one `Course`; deleting a linked course clears the note's course link rather than deleting the note. Notes are indexed by user, course, and update time.
+
 The authentication models `Account`, `Session`, and `VerificationToken` are also present for Auth.js persistence and session support.
 
 ### Planned Models
 
 The following models are **planned** and are not implemented in the current database schema:
 
-- **Note** — planned
 - **ScheduleEvent** — planned
 - **Expense** — planned
 
@@ -148,11 +158,21 @@ The following models are **planned** and are not implemented in the current data
 - Added assignment cards with course color strips, priority badges, status pills, due dates, and completion controls.
 - Replaced the dashboard's mock assignment feed and assignment statistics with live PostgreSQL data.
 
+### Sprint 06 — Notes Management System
+
+- Fixed the two shared `Card` and `Input` empty-interface lint errors without changing their public APIs or styling.
+- Added PostgreSQL persistence for personal and course-specific notes through Prisma.
+- Added secure Note CRUD API routes with authenticated ownership checks and optional course validation.
+- Added Notes dashboard, instant title/content search, course filtering, pinned filtering, and pinned-first recent ordering.
+- Added distraction-free note creation and editing with React Hook Form, Zod validation, pinning, save feedback, and unsaved-change protection.
+- Added note detail reading view and accessible permanent-delete confirmation.
+- Replaced the dashboard's mock Recent Notes widget with four live, pinned-first PostgreSQL notes.
+
 ## Current State
 
-Sprint 05 is complete.
+Sprint 06 is complete.
 
-The next development milestone is **Sprint 06 — Notes**. Notes are planned work and are not currently implemented as a database-backed feature.
+The next development milestone is **Sprint 07 — Schedule**. Schedule events are planned work and are not currently implemented as a database-backed feature.
 
 ## Roadmap
 
@@ -163,8 +183,8 @@ The next development milestone is **Sprint 06 — Notes**. Notes are planned wor
 | 03 Dashboard | Complete |
 | 04 Courses | Complete |
 | 05 Assignments | Complete |
-| 06 Notes | Next |
-| 07 Schedule | Planned |
+| 06 Notes | Complete |
+| 07 Schedule | Next |
 | 08 Expenses | Planned |
 | 09 Analytics | Planned |
 | 10 Polish & Deployment | Planned |
