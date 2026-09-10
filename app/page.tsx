@@ -15,7 +15,8 @@ export default async function Home() {
     redirect("/login");
   }
 
-  const [pendingAssignments, completedAssignments, upcomingAssignments, recentNotes] = await Promise.all([
+  const today = new Date().getDay() || 7;
+  const [pendingAssignments, completedAssignments, upcomingAssignments, recentNotes, todaySchedule] = await Promise.all([
     prisma.assignment.count({ where: { userId: session.user.id, status: { not: "COMPLETED" } } }),
     prisma.assignment.count({ where: { userId: session.user.id, status: "COMPLETED" } }),
     prisma.assignment.findMany({
@@ -29,6 +30,11 @@ export default async function Home() {
       include: { course: { select: { id: true, courseCode: true, title: true, color: true } } },
       orderBy: [{ pinned: "desc" }, { updatedAt: "desc" }],
       take: 4,
+    }),
+    prisma.scheduleEvent.findMany({
+      where: { userId: session.user.id, dayOfWeek: today },
+      include: { course: { select: { id: true, courseCode: true, title: true, color: true } } },
+      orderBy: { startTime: "asc" },
     }),
   ]);
 
@@ -47,6 +53,11 @@ export default async function Home() {
           ...note,
           createdAt: note.createdAt.toISOString(),
           updatedAt: note.updatedAt.toISOString(),
+        }))}
+        todaySchedule={todaySchedule.map((event) => ({
+          ...event,
+          createdAt: event.createdAt.toISOString(),
+          updatedAt: event.updatedAt.toISOString(),
         }))}
       />
     </AppShell>

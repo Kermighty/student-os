@@ -44,7 +44,7 @@ The repository uses a feature-first structure:
 
 - `app/` — Next.js App Router routes, layouts, pages, and API route handlers.
 - `components/` — Shared UI, authentication components, layout pieces, and providers.
-- `features/` — Domain-specific modules. The implemented modules currently include dashboard, courses, assignments, and notes.
+- `features/` — Domain-specific modules. The implemented modules currently include dashboard, courses, assignments, notes, and schedule.
 - `lib/` — Shared infrastructure and utilities, including the Prisma client.
 - `prisma/` — Prisma schema and database migrations.
 - `hooks/` — Reusable client-side hooks, including mobile navigation behavior.
@@ -98,13 +98,25 @@ Each `Assignment` belongs to exactly one `User` and one `Course`. Users can own 
 
 Each `Note` belongs to exactly one `User`. A note may optionally belong to one `Course`; deleting a linked course clears the note's course link rather than deleting the note. Notes are indexed by user, course, and update time.
 
+### ScheduleEvent
+
+`ScheduleEvent` stores recurring weekly classes, study sessions, exams, and personal events:
+
+- Optional course link
+- Event title and type: `CLASS`, `STUDY`, `EXAM`, or `PERSONAL`
+- Monday-to-Sunday day number
+- Start and end times
+- Optional location and event color
+- Creation and update timestamps
+
+Each `ScheduleEvent` belongs to exactly one `User` and may optionally belong to one `Course`. Deleting a linked course clears the course link. Schedule events are indexed by user, course, day, and start time.
+
 The authentication models `Account`, `Session`, and `VerificationToken` are also present for Auth.js persistence and session support.
 
 ### Planned Models
 
 The following models are **planned** and are not implemented in the current database schema:
 
-- **ScheduleEvent** — planned
 - **Expense** — planned
 
 ## Completed Sprints
@@ -168,11 +180,21 @@ The following models are **planned** and are not implemented in the current data
 - Added note detail reading view and accessible permanent-delete confirmation.
 - Replaced the dashboard's mock Recent Notes widget with four live, pinned-first PostgreSQL notes.
 
+### Sprint 07 — Schedule Management System
+
+- Added PostgreSQL persistence for weekly schedule events through Prisma.
+- Added secure ScheduleEvent CRUD APIs with authenticated ownership and optional course ownership validation.
+- Added Monday-to-Sunday desktop timetable with positioned event blocks from 6:00 AM to 10:00 PM.
+- Added mobile day selector and touch-friendly vertical event timeline.
+- Added event creation, detail, editing, deletion, color labels, and event type labels.
+- Added server-side conflict detection that blocks overlapping events on the same day.
+- Replaced the dashboard's mock Today’s Schedule widget with live events for the authenticated user's current weekday.
+
 ## Current State
 
-Sprint 06 is complete.
+Sprint 07 is complete.
 
-The next development milestone is **Sprint 07 — Schedule**. Schedule events are planned work and are not currently implemented as a database-backed feature.
+The next development milestone is **Sprint 08 — Expenses**. Expenses are planned work and are not currently implemented as a database-backed feature.
 
 ## Roadmap
 
@@ -184,8 +206,8 @@ The next development milestone is **Sprint 07 — Schedule**. Schedule events ar
 | 04 Courses | Complete |
 | 05 Assignments | Complete |
 | 06 Notes | Complete |
-| 07 Schedule | Next |
-| 08 Expenses | Planned |
+| 07 Schedule | Complete |
+| 08 Expenses | Next |
 | 09 Analytics | Planned |
 | 10 Polish & Deployment | Planned |
 

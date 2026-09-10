@@ -15,9 +15,10 @@ import { NotePreviewCard } from "@/features/dashboard/components/note-preview-ca
 import { ProgressRing } from "@/features/dashboard/components/progress-ring";
 import { ScheduleTimeline } from "@/features/dashboard/components/schedule-timeline";
 import { StatCard } from "@/features/dashboard/components/stat-card";
-import { schedule, statCards } from "@/features/dashboard/data";
+import { statCards } from "@/features/dashboard/data";
 import type { AssignmentRecord } from "@/features/assignments/assignment-types";
 import type { NoteRecord } from "@/features/notes/note-types";
+import type { ScheduleEventRecord } from "@/features/schedule/schedule-types";
 import Link from "next/link";
 
 interface DashboardPageProps {
@@ -25,6 +26,7 @@ interface DashboardPageProps {
   assignmentSummary: { pending: number; completed: number };
   upcomingAssignments: AssignmentRecord[];
   recentNotes: NoteRecord[];
+  todaySchedule: ScheduleEventRecord[];
 }
 
 function getGreeting(date: Date) {
@@ -46,7 +48,7 @@ function getIcon(name: string) {
   return icons[name as keyof typeof icons] ?? BookOpen;
 }
 
-export function DashboardPage({ name, assignmentSummary, upcomingAssignments, recentNotes }: DashboardPageProps) {
+export function DashboardPage({ name, assignmentSummary, upcomingAssignments, recentNotes, todaySchedule }: DashboardPageProps) {
   const today = new Date();
   const greeting = getGreeting(today);
   const todayLabel = new Intl.DateTimeFormat("en-US", {
@@ -121,12 +123,12 @@ export function DashboardPage({ name, assignmentSummary, upcomingAssignments, re
                 <h2 className="mt-1 text-xl font-semibold text-slate-900 dark:text-white">Today’s schedule</h2>
               </div>
               <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-200">
-                4 sessions
+                {todaySchedule.length} {todaySchedule.length === 1 ? "session" : "sessions"}
               </span>
             </div>
 
             <div className="mt-5">
-              <ScheduleTimeline items={schedule} />
+              {todaySchedule.length ? <ScheduleTimeline items={todaySchedule} /> : <EmptyState />}
             </div>
           </section>
 

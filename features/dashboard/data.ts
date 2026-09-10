@@ -1,13 +1,3 @@
-export type ScheduleBlockItem = {
-  id: string;
-  start: string;
-  end: string;
-  course: string;
-  room: string;
-  instructor: string;
-  color: string;
-};
-
 export const statCards = [
   {
     label: "Active Courses",
@@ -42,45 +32,6 @@ export const statCards = [
     tone: "violet",
   },
 ] as const;
-
-export const schedule: ScheduleBlockItem[] = [
-  {
-    id: "s1",
-    start: "09:00",
-    end: "10:15",
-    course: "Data Structures",
-    room: "Room 204",
-    instructor: "Dr. Alvarez",
-    color: "bg-blue-500",
-  },
-  {
-    id: "s2",
-    start: "11:00",
-    end: "12:15",
-    course: "Statistics",
-    room: "Room 118",
-    instructor: "Prof. Lin",
-    color: "bg-violet-500",
-  },
-  {
-    id: "s3",
-    start: "14:00",
-    end: "15:30",
-    course: "Design Studio",
-    room: "Studio B",
-    instructor: "A. Moreno",
-    color: "bg-emerald-500",
-  },
-  {
-    id: "s4",
-    start: "17:30",
-    end: "18:45",
-    course: "Study Group",
-    room: "Library North",
-    instructor: "Peer Circle",
-    color: "bg-amber-500",
-  },
-];
 
 export const calendarDays = [
   "Mon",

@@ -19,6 +19,13 @@ enum AssignmentStatus {
   COMPLETED
 }
 
+enum EventType {
+  CLASS
+  STUDY
+  EXAM
+  PERSONAL
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -31,6 +38,7 @@ model User {
   courses       Course[]
   assignments   Assignment[]
   notes         Note[]
+  scheduleEvents ScheduleEvent[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }
@@ -51,6 +59,7 @@ model Course {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   assignments Assignment[]
   notes Note[]
+  scheduleEvents ScheduleEvent[]
 
   @@index([userId])
 }
@@ -91,6 +100,28 @@ model Note {
   @@index([userId])
   @@index([courseId])
   @@index([userId, updatedAt])
+}
+
+model ScheduleEvent {
+  id         String    @id @default(cuid())
+  userId     String
+  courseId   String?
+  title      String
+  eventType  EventType
+  dayOfWeek  Int
+  startTime  String
+  endTime    String
+  location   String
+  color      String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course? @relation(fields: [courseId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([courseId])
+  @@index([userId, dayOfWeek, startTime])
 }
 
 model Account {
