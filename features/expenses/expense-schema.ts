@@ -32,10 +32,6 @@ export const categorySchema = z.object({
 export type ExpenseFormValues = z.infer<typeof expenseSchema>;
 export type CategoryFormValues = z.infer<typeof categorySchema>;
 
-export function formatCurrency(amount: number | string) {
-  return new Intl.NumberFormat("en-PH", { style: "currency", currency: "PHP" }).format(Number(amount));
-}
-
 export function formatExpenseDate(value: Date | string) {
   return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(new Date(value));
 }

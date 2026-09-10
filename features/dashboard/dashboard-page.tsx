@@ -13,7 +13,7 @@ import { MiniCalendar } from "@/features/dashboard/components/mini-calendar";
 import { MotivationCard } from "@/features/dashboard/components/motivation-card";
 import { NotePreviewCard } from "@/features/dashboard/components/note-preview-card";
 import { ExpensePreviewCard } from "@/features/dashboard/components/expense-preview-card";
-import { formatCurrency } from "@/features/expenses/expense-schema";
+import { formatPHP } from "@/lib/currency";
 import { ProgressRing } from "@/features/dashboard/components/progress-ring";
 import { ScheduleTimeline } from "@/features/dashboard/components/schedule-timeline";
 import { StatCard } from "@/features/dashboard/components/stat-card";
@@ -67,7 +67,7 @@ export function DashboardPage({ name, assignmentSummary, upcomingAssignments, re
       <DashboardHeader name={name} greeting={greeting} todayLabel={todayLabel} />
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-6">
-        {[...statCards.map((card) => card.label === "Pending Assignments" ? { ...card, value: String(assignmentSummary.pending), description: `${assignmentSummary.pending === 1 ? "1 assignment" : `${assignmentSummary.pending} assignments`} still in progress`, trend: "Live from PostgreSQL" } : card.label === "Monthly Expenses" ? { ...card, value: formatCurrency(financeSummary.expenses), description: "This month", trend: "Live from PostgreSQL" } : card), {
+        {[...statCards.map((card) => card.label === "Pending Assignments" ? { ...card, value: String(assignmentSummary.pending), description: `${assignmentSummary.pending === 1 ? "1 assignment" : `${assignmentSummary.pending} assignments`} still in progress`, trend: "Live from PostgreSQL" } : card.label === "Monthly Expenses" ? { ...card, value: formatPHP(financeSummary.expenses), description: "This month", trend: "Live from PostgreSQL" } : card), {
           label: "Completed Assignments",
           value: String(assignmentSummary.completed),
           description: "Finished assignments",
@@ -89,7 +89,7 @@ export function DashboardPage({ name, assignmentSummary, upcomingAssignments, re
             />
           );
         })}
-        {[{ label: "Monthly Balance", value: formatCurrency(financeSummary.income - financeSummary.expenses), description: "Income minus expenses", trend: "Live from PostgreSQL", icon: "Wallet", tone: "blue" as const }].map((card) => { const Icon = getIcon(card.icon); return <StatCard key={card.label} label={card.label} value={card.value} description={card.description} trend={card.trend} icon={<Icon className="h-5 w-5" />} tone={card.tone} />; })}
+        {[{ label: "Monthly Balance", value: formatPHP(financeSummary.income - financeSummary.expenses), description: "Income minus expenses", trend: "Live from PostgreSQL", icon: "Wallet", tone: "blue" as const }].map((card) => { const Icon = getIcon(card.icon); return <StatCard key={card.label} label={card.label} value={card.value} description={card.description} trend={card.trend} icon={<Icon className="h-5 w-5" />} tone={card.tone} />; })}
       </section>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.7fr)_360px]">
