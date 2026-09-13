@@ -2,7 +2,7 @@ import { notFound, redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/auth";
-import { AppShell } from "@/components/layout/app-shell";
+import { AppShellServer as AppShell } from "@/components/layout/app-shell-server";
 import { AssignmentForm } from "@/features/assignments/assignment-form";
 import { formatDateTimeLocal } from "@/features/assignments/assignment-schema";
 import { PageHeader } from "@/components/ui/page-header";

@@ -38,6 +38,7 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?
+  preferredCurrency String @default("PHP")
   accounts      Account[]
   sessions      Session[]
   courses       Course[]

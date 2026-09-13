@@ -8,6 +8,7 @@ import { exportUserData } from "@/lib/server-data";
 import { prisma } from "@/lib/prisma";
 
 const profileSchema = z.object({ name: z.string().trim().min(2).max(80) });
+const currencySchema = z.object({ preferredCurrency: z.enum(["PHP", "USD", "EUR", "JPY"]) });
 const passwordSchema = z.object({ currentPassword: z.string().min(8), newPassword: z.string().min(8).regex(/[A-Z]/).regex(/[a-z]/).regex(/[0-9]/) });
 
 export async function PATCH(request: Request) {
@@ -21,6 +22,16 @@ export async function PATCH(request: Request) {
     if (!user?.password || !(await bcrypt.compare(parsed.data.currentPassword, user.password))) return NextResponse.json({ error: "Current password is incorrect." }, { status: 400 });
     await prisma.user.update({ where: { id: session.user.id }, data: { password: await bcrypt.hash(parsed.data.newPassword, 12) } });
     return NextResponse.json({ message: "Password updated." });
+  }
+  if (body.preferredCurrency !== undefined) {
+    const currencyParsed = currencySchema.safeParse(body);
+    if (!currencyParsed.success) return NextResponse.json({ error: "Unsupported currency." }, { status: 400 });
+    const account = await prisma.user.update({
+      where: { id: session.user.id },
+      data: { preferredCurrency: currencyParsed.data.preferredCurrency },
+      select: { id: true, name: true, email: true, preferredCurrency: true },
+    });
+    return NextResponse.json({ user: account });
   }
   const parsed = profileSchema.safeParse(body);
   if (!parsed.success) return NextResponse.json({ error: "Display name must be between 2 and 80 characters." }, { status: 400 });

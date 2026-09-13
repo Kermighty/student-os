@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/auth";
-import { AppShell } from "@/components/layout/app-shell";
+import { AppShellServer as AppShell } from "@/components/layout/app-shell-server";
 import { ReportsWorkspace } from "@/features/reports/reports-workspace";
 import { getReportsData } from "@/lib/server-data";
 

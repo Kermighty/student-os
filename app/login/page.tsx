@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 
 import { LoginForm } from "@/components/auth/login-form";
 import { authOptions } from "@/auth";
+import { isGoogleProviderEnabled } from "@/lib/auth-providers";
 
 export default async function LoginPage() {
   const session = await getServerSession(authOptions);
@@ -11,5 +12,5 @@ export default async function LoginPage() {
     redirect("/");
   }
 
-  return <LoginForm />;
+  return <LoginForm hasGoogleProvider={isGoogleProviderEnabled()} />;
 }

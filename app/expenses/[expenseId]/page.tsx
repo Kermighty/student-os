@@ -2,7 +2,7 @@ import { notFound, redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/auth";
-import { AppShell } from "@/components/layout/app-shell";
+import { AppShellServer as AppShell } from "@/components/layout/app-shell-server";
 import { serializeExpense } from "@/features/expenses/expense-data";
 import { ExpenseDetail } from "@/features/expenses/expense-detail";
 import { prisma } from "@/lib/prisma";

@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
-import { AppShell } from "@/components/layout/app-shell";
+import { AppShellServer as AppShell } from "@/components/layout/app-shell-server";
 import { authOptions } from "@/auth";
 import { CourseDetail } from "@/features/courses/course-detail";
 import { prisma } from "@/lib/prisma";

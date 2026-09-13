@@ -8,6 +8,7 @@ import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -21,7 +22,7 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
-export function LoginForm() {
+export function LoginForm({ hasGoogleProvider = false }: { hasGoogleProvider?: boolean }) {
   const router = useRouter();
   const [loginError, setLoginError] = useState<string | null>(null);
 
@@ -99,6 +100,17 @@ export function LoginForm() {
             <Button type="submit" className="w-full" disabled={isSubmitting}>
               {isSubmitting ? "Signing in..." : "Sign in"}
             </Button>
+
+            {hasGoogleProvider ? (
+              <div className="space-y-4 pt-1">
+                <div className="flex items-center gap-3">
+                  <span className="h-px flex-1 bg-slate-200 dark:bg-slate-800" />
+                  <span className="text-xs font-medium uppercase tracking-[0.14em] text-slate-400">or</span>
+                  <span className="h-px flex-1 bg-slate-200 dark:bg-slate-800" />
+                </div>
+                <GoogleSignInButton hasGoogleProvider={hasGoogleProvider} />
+              </div>
+            ) : null}
           </form>
         </Card>
       </div>

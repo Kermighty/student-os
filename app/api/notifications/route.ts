@@ -19,7 +19,7 @@ export async function GET() {
     prisma.scheduleEvent.findMany({ where: { userId: session.user.id, dayOfWeek: today }, orderBy: { startTime: "asc" }, take: 5, select: { id: true, title: true, startTime: true, location: true } }),
     prisma.assignment.findMany({ where: { userId: session.user.id, status: { not: "COMPLETED" }, dueDate: { gte: now, lte: nextWeek } }, orderBy: { dueDate: "asc" }, take: 5, select: { id: true, title: true, dueDate: true } }),
     prisma.note.findMany({ where: { userId: session.user.id, createdAt: { gte: recentStart } }, orderBy: { createdAt: "desc" }, take: 5, select: { id: true, title: true, createdAt: true } }),
-    prisma.expense.findMany({ where: { userId: session.user.id, createdAt: { gte: recentStart } }, orderBy: { createdAt: "desc" }, take: 5, select: { id: true, title: true, createdAt: true } }),
+    prisma.expense.findMany({ where: { userId: session.user.id, transactionDate: { gte: recentStart } }, orderBy: { transactionDate: "desc" }, take: 5, select: { id: true, title: true, transactionDate: true } }),
   ]);
 
   return NextResponse.json({

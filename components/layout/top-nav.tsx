@@ -90,7 +90,7 @@ export function TopNav({ onMenuOpen }: TopNavProps) {
 
 type NotificationData = {
   today: { classes: Array<{ id: string; title: string; startTime: string; location: string }>; assignments: Array<{ id: string; title: string; dueDate: string }> };
-  recent: { notes: Array<{ id: string; title: string; createdAt: string }>; expenses: Array<{ id: string; title: string; createdAt: string }> };
+  recent: { notes: Array<{ id: string; title: string; createdAt: string }>; expenses: Array<{ id: string; title: string; transactionDate: string }> };
 };
 
 function NotificationSections({ data }: { data: NotificationData }) {

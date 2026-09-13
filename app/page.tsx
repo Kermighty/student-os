@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
-import { AppShell } from "@/components/layout/app-shell";
+import { AppShellServer as AppShell } from "@/components/layout/app-shell-server";
 import { authOptions } from "@/auth";
 import { DashboardPage } from "@/features/dashboard/dashboard-page";
 import { serializeExpense } from "@/features/expenses/expense-data";
@@ -19,7 +19,7 @@ export default async function Home() {
   const today = new Date().getDay() || 7;
   const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
   const nextMonthStart = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 1);
-  const [pendingAssignments, completedAssignments, upcomingAssignments, recentNotes, todaySchedule, monthlyExpenses, recentExpenses] = await Promise.all([
+  const [pendingAssignments, completedAssignments, upcomingAssignments, recentNotes, todaySchedule, monthlyExpenses, recentExpenses, currencyUser] = await Promise.all([
     prisma.assignment.count({ where: { userId: session.user.id, status: { not: "COMPLETED" } } }),
     prisma.assignment.count({ where: { userId: session.user.id, status: "COMPLETED" } }),
     prisma.assignment.findMany({
@@ -49,6 +49,10 @@ export default async function Home() {
       orderBy: { transactionDate: "desc" },
       take: 3,
     }),
+    prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { preferredCurrency: true },
+    }),
   ]);
 
   return (
@@ -77,6 +81,7 @@ export default async function Home() {
           income: monthlyExpenses.filter((expense) => expense.type === "INCOME").reduce((sum, expense) => sum + Number(expense.amount), 0),
         }}
         recentExpenses={recentExpenses.map(serializeExpense)}
+        currency={currencyUser?.preferredCurrency ?? "PHP"}
       />
     </AppShell>
   );

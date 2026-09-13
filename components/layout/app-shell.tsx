@@ -6,16 +6,19 @@ import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sidebar } from "@/components/layout/sidebar";
 import { TopNav } from "@/components/layout/top-nav";
+import { CurrencyProvider } from "@/components/providers/currency-provider";
 import { useMobileNav } from "@/hooks/use-mobile-nav";
 import { navigationItems } from "@/components/layout/navigation";
+import { DEFAULT_CURRENCY } from "@/lib/currency";
 
-export function AppShell({ children }: { children: React.ReactNode }) {
+export function AppShell({ children, courseCount = 0, currency = DEFAULT_CURRENCY }: { children: React.ReactNode; courseCount?: number; currency?: string }) {
   const { isOpen, close, open } = useMobileNav();
 
   return (
+    <CurrencyProvider initialCurrency={currency}>
     <div className="flex min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50">
       <div className="hidden md:block">
-        <Sidebar />
+        <Sidebar courseCount={courseCount} />
       </div>
 
       {isOpen ? (
@@ -54,5 +57,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </main>
       </div>
     </div>
+    </CurrencyProvider>
   );
 }

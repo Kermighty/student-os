@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -31,7 +32,7 @@ const registerSchema = z
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
-export function RegisterForm() {
+export function RegisterForm({ hasGoogleProvider = false }: { hasGoogleProvider?: boolean }) {
   const router = useRouter();
   const [serverError, setServerError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -130,6 +131,17 @@ export function RegisterForm() {
             <Button type="submit" className="w-full" disabled={isSubmitting}>
               {isSubmitting ? "Creating account..." : "Create account"}
             </Button>
+
+            {hasGoogleProvider ? (
+              <div className="space-y-4 pt-1">
+                <div className="flex items-center gap-3">
+                  <span className="h-px flex-1 bg-slate-200 dark:bg-slate-800" />
+                  <span className="text-xs font-medium uppercase tracking-[0.14em] text-slate-400">or</span>
+                  <span className="h-px flex-1 bg-slate-200 dark:bg-slate-800" />
+                </div>
+                <GoogleSignInButton hasGoogleProvider={hasGoogleProvider} label="Create account with Google" />
+              </div>
+            ) : null}
 
             <p className="text-center text-sm text-slate-600 dark:text-slate-300">
               Already have an account? {" "}

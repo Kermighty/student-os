@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
-import { AppShell } from "@/components/layout/app-shell";
+import { AppShellServer as AppShell } from "@/components/layout/app-shell-server";
 import { authOptions } from "@/auth";
 import { CourseCard } from "@/features/courses/course-card";
 import { CourseEmptyState } from "@/features/courses/course-empty-state";

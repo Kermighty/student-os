@@ -44,7 +44,7 @@ The repository uses a feature-first structure:
 
 - `app/` — Next.js App Router routes, layouts, pages, and API route handlers.
 - `components/` — Shared UI, authentication components, layout pieces, and providers.
-- `features/` — Domain-specific modules. The implemented modules currently include dashboard, courses, assignments, notes, schedule, expenses, analytics, search, and settings.
+- `features/` — Domain-specific modules. The implemented modules currently include dashboard, courses, assignments, notes, schedule, expenses, analytics, search, reports, and settings.
 - `lib/` — Shared infrastructure and utilities, including the Prisma client.
 - `prisma/` — Prisma schema and database migrations.
 - `hooks/` — Reusable client-side hooks, including mobile navigation behavior.
@@ -58,7 +58,7 @@ The database uses Prisma with PostgreSQL. The implemented schema contains the fo
 
 ### User
 
-`User` stores authenticated user identity and profile data, including name, email, password, optional image, timestamps, accounts, sessions, and owned courses.
+`User` stores authenticated user identity and profile data, including name, email, password, optional image, a `preferredCurrency` preference defaulting to `PHP`, timestamps, accounts, sessions, and owned courses.
 
 ### Course
 
@@ -231,11 +231,28 @@ The following models are **planned** and are not implemented in the current data
 - Improved browser metadata, Open Graph metadata, Twitter metadata, keywords, authorship, and favicon declaration.
 - Verified Prisma generation, migration status, lint, and production build.
 
-## Current State
+### Sprint 11 — Multi-Currency, Google Authentication & Production Finalization
+- Added a `preferredCurrency` field on `User` with a default of `PHP`, applied through the `add_preferred_currency` migration. No new table was introduced.
+- Added a single reusable currency formatter in `lib/currency.ts` supporting `PHP`, `USD`, `EUR`, and `JPY`, and replaced every previous `formatPHP` call site with it.
+- Added a currency provider and `useCurrencyFormatter` hook so money surfaces re-render instantly when the preference changes, and a Currency section in Settings that persists the selection to PostgreSQL.
+- Wired the dashboard, expenses, reports, analytics, and notifications surfaces to the authenticated user's preferred currency.
+- Added Google authentication through Auth.js `GoogleProvider`, configured only from `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`.
+- Linked Google sign-ins to existing accounts by verified email so one user exists per email, and kept credentials sign-in fully working.
+- Added a premium neutral Google button with the official multicolor logo to both the login and registration pages, hidden automatically when Google credentials are not configured.
+- Replaced the hardcoded sidebar semester snapshot with the authenticated user's real PostgreSQL course count.
+- Added a server-side `AppShellServer` wrapper so the desktop sidebar and mobile drawer render the shared navigation source and real workspace snapshot.
+- Moved Reports directly below Analytics and gave it a distinct icon instead of sharing the Analytics icon.
+- Changed recent expense notifications to key off `transactionDate` so they match the Expenses module behavior.
+- Removed the duplicated legacy foundation README section so only the modern Next.js 16 documentation remains.
+- Ignored `.vscode/` and `*.log`, and removed development-only log and verification files from the repository.
+- Verified ESLint, the production build, the credentials flow, the Google button gating, the persisted currency preference, mobile navigation, and the light/dark theme at runtime.
 
-Sprint 10 is complete.
+## Current State
+Sprint 11 is complete.
 
 Student OS is feature complete and prepared for a manual Vercel Hobby plus Neon PostgreSQL deployment. Deployment itself was intentionally not performed in this sprint.
+
+Google authentication activates as soon as `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` are present; without them the Google button is hidden and credentials sign-in continues to work unchanged.
 
 ## Roadmap
 
@@ -251,6 +268,7 @@ Student OS is feature complete and prepared for a manual Vercel Hobby plus Neon 
 | 08 Expenses | Complete |
 | 09 Analytics | Complete |
 | 10 Polish & Deployment | Complete |
+| 11 Multi-Currency, Google Auth & Finalization | Complete |
 
 ## Engineering Standards
 

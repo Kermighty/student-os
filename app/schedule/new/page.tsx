@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/auth";
-import { AppShell } from "@/components/layout/app-shell";
+import { AppShellServer as AppShell } from "@/components/layout/app-shell-server";
 import { PageHeader } from "@/components/ui/page-header";
 import { ScheduleForm } from "@/features/schedule/schedule-form";
 import { prisma } from "@/lib/prisma";
