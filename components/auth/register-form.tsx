@@ -11,6 +11,7 @@ import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { PageHeader } from "@/components/ui/page-header";
 
 const registerSchema = z
@@ -113,7 +114,7 @@ export function RegisterForm({ hasGoogleProvider = false }: { hasGoogleProvider?
               <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-200">
                 Password
               </label>
-              <Input id="password" type="password" placeholder="Create a secure password" {...register("password")} />
+              <PasswordInput id="password" placeholder="Create a secure password" {...register("password")} />
               {errors.password ? <p className="mt-1 text-xs text-red-500">{errors.password.message}</p> : null}
             </div>
 
@@ -121,7 +122,7 @@ export function RegisterForm({ hasGoogleProvider = false }: { hasGoogleProvider?
               <label htmlFor="confirmPassword" className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-200">
                 Confirm password
               </label>
-              <Input id="confirmPassword" type="password" placeholder="Repeat your password" {...register("confirmPassword")} />
+              <PasswordInput id="confirmPassword" placeholder="Repeat your password" {...register("confirmPassword")} />
               {errors.confirmPassword ? <p className="mt-1 text-xs text-red-500">{errors.confirmPassword.message}</p> : null}
             </div>
 

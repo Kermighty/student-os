@@ -140,7 +140,7 @@ export function CourseForm({ mode, defaultValues, courseId }: CourseFormProps) {
         <div className="grid gap-5 md:grid-cols-2">
           <div className="space-y-2">
             <label className="text-sm font-medium text-slate-700 dark:text-slate-200">Semester</label>
-            <Input {...register("semester")} placeholder="Fall 2026" />
+            <Input {...register("semester")} placeholder="e.g. 1st Semester" />
             {errors.semester ? <p className="text-xs text-red-500">{errors.semester.message}</p> : null}
           </div>
 

@@ -12,6 +12,7 @@ import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { PageHeader } from "@/components/ui/page-header";
 
 const loginSchema = z.object({
@@ -80,7 +81,7 @@ export function LoginForm({ hasGoogleProvider = false }: { hasGoogleProvider?: b
               <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-200">
                 Password
               </label>
-              <Input id="password" type="password" placeholder="••••••••" {...register("password")} />
+              <PasswordInput id="password" placeholder="••••••••" {...register("password")} />
               {errors.password ? <p className="mt-1 text-xs text-red-500">{errors.password.message}</p> : null}
             </div>
 

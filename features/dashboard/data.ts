@@ -1,38 +1,3 @@
-export const statCards = [
-  {
-    label: "Active Courses",
-    value: "6",
-    description: "Across 2 departments",
-    trend: "+1 from last week",
-    icon: "BookOpen",
-    tone: "blue",
-  },
-  {
-    label: "Pending Assignments",
-    value: "11",
-    description: "3 due this week",
-    trend: "2 critical",
-    icon: "ClipboardList",
-    tone: "amber",
-  },
-  {
-    label: "Classes This Week",
-    value: "18",
-    description: "92% attendance",
-    trend: "+3 compared to last week",
-    icon: "CalendarDays",
-    tone: "emerald",
-  },
-  {
-    label: "Monthly Expenses",
-    value: "Live",
-    description: "Budget on track",
-    trend: "Live from PostgreSQL",
-    icon: "Wallet",
-    tone: "violet",
-  },
-] as const;
-
 export const calendarDays = [
   "Mon",
   "Tue",
@@ -43,38 +8,35 @@ export const calendarDays = [
   "Sun",
 ] as const;
 
-export const calendarDates = [
-  { day: 29, muted: true },
-  { day: 30, muted: true },
-  { day: 1 },
-  { day: 2 },
-  { day: 3 },
-  { day: 4 },
-  { day: 5 },
-  { day: 6 },
-  { day: 7 },
-  { day: 8 },
-  { day: 9 },
-  { day: 10, active: true },
-  { day: 11 },
-  { day: 12 },
-  { day: 13 },
-  { day: 14 },
-  { day: 15 },
-  { day: 16 },
-  { day: 17 },
-  { day: 18 },
-  { day: 19 },
-  { day: 20 },
-  { day: 21 },
-  { day: 22 },
-  { day: 23 },
-  { day: 24 },
-  { day: 25 },
-  { day: 26 },
-  { day: 27 },
-  { day: 28 },
-  { day: 29 },
-  { day: 30 },
-  { day: 31 },
-];
+export type CalendarCell = { day: number; muted?: boolean; active?: boolean };
+
+/** Builds a real calendar grid for the given month, with today highlighted. */
+export function buildCalendarDates(reference = new Date()): CalendarCell[] {
+  const year = reference.getFullYear();
+  const month = reference.getMonth();
+  const firstWeekday = (new Date(year, month, 1).getDay() + 6) % 7;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const daysInPreviousMonth = new Date(year, month, 0).getDate();
+
+  const cells: CalendarCell[] = [];
+
+  for (let index = firstWeekday; index > 0; index -= 1) {
+    cells.push({ day: daysInPreviousMonth - index + 1, muted: true });
+  }
+
+  for (let day = 1; day <= daysInMonth; day += 1) {
+    const isToday =
+      reference.getDate() === day &&
+      reference.getMonth() === month &&
+      reference.getFullYear() === year;
+    cells.push({ day, active: isToday });
+  }
+
+  let nextMonthDay = 1;
+  while (cells.length % 7 !== 0) {
+    cells.push({ day: nextMonthDay, muted: true });
+    nextMonthDay += 1;
+  }
+
+  return cells;
+}

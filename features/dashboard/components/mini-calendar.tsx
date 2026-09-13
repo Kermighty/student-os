@@ -1,14 +1,18 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import { calendarDates, calendarDays } from "@/features/dashboard/data";
+import { buildCalendarDates, calendarDays } from "@/features/dashboard/data";
 
 export function MiniCalendar() {
+  const today = new Date();
+  const calendarDates = buildCalendarDates(today);
+  const monthLabel = new Intl.DateTimeFormat("en-US", { month: "long" }).format(today);
+
   return (
     <div className="rounded-[24px] border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
       <div className="mb-4 flex items-center justify-between">
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">Calendar</p>
-          <h3 className="mt-1 text-lg font-semibold text-slate-900 dark:text-white">September</h3>
+          <h3 className="mt-1 text-lg font-semibold text-slate-900 dark:text-white">{monthLabel}</h3>
         </div>
 
         <div className="flex items-center gap-1">

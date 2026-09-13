@@ -19,7 +19,7 @@ export default async function Home() {
   const today = new Date().getDay() || 7;
   const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
   const nextMonthStart = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 1);
-  const [pendingAssignments, completedAssignments, upcomingAssignments, recentNotes, todaySchedule, monthlyExpenses, recentExpenses, currencyUser] = await Promise.all([
+  const [pendingAssignments, completedAssignments, upcomingAssignments, recentNotes, todaySchedule, monthlyExpenses, recentExpenses, currencyUser, courseCount] = await Promise.all([
     prisma.assignment.count({ where: { userId: session.user.id, status: { not: "COMPLETED" } } }),
     prisma.assignment.count({ where: { userId: session.user.id, status: "COMPLETED" } }),
     prisma.assignment.findMany({
@@ -53,6 +53,9 @@ export default async function Home() {
       where: { id: session.user.id },
       select: { preferredCurrency: true },
     }),
+    prisma.course.count({
+      where: { userId: session.user.id },
+    }),
   ]);
 
   return (
@@ -82,6 +85,7 @@ export default async function Home() {
         }}
         recentExpenses={recentExpenses.map(serializeExpense)}
         currency={currencyUser?.preferredCurrency ?? "PHP"}
+        courseCount={courseCount}
       />
     </AppShell>
   );

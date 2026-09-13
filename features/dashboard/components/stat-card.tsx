@@ -20,21 +20,21 @@ const toneStyles = {
 
 export function StatCard({ label, value, description, trend, icon, tone }: StatCardProps) {
   return (
-    <Card className="group rounded-[24px] p-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_18px_35px_rgba(15,23,42,0.08)] dark:hover:shadow-[0_18px_35px_rgba(2,6,23,0.4)]">
+    <Card className="group flex h-full flex-col rounded-[24px] p-5 transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_18px_35px_rgba(15,23,42,0.08)] dark:hover:border-slate-700 dark:hover:shadow-[0_18px_35px_rgba(2,6,23,0.4)]">
       <div className="flex items-start justify-between gap-3">
-        <div>
+        <div className="min-w-0">
           <p className="text-sm text-slate-500 dark:text-slate-400">{label}</p>
-          <p className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">{value}</p>
+          <p className="mt-3 truncate text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">{value}</p>
         </div>
 
-        <div className={`flex h-11 w-11 items-center justify-center rounded-2xl ring-1 ${toneStyles[tone]}`}>
+        <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ring-1 transition-transform duration-200 group-hover:scale-105 ${toneStyles[tone]}`}>
           {icon}
         </div>
       </div>
 
-      <div className="mt-4 flex items-center justify-between gap-3">
-        <p className="text-xs text-slate-600 dark:text-slate-300">{description}</p>
-        <span className="rounded-full bg-slate-100 px-2 py-1 text-[10px] font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+      <div className="mt-auto flex items-end justify-between gap-3 pt-5">
+        <p className="text-xs text-slate-500 dark:text-slate-400">{description}</p>
+        <span className="shrink-0 rounded-full bg-slate-100 px-2 py-1 text-[10px] font-medium text-slate-500 dark:bg-slate-800 dark:text-slate-400">
           {trend}
         </span>
       </div>
