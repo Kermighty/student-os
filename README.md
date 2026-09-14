@@ -28,45 +28,53 @@ It started as a way to practice building a complete full-stack app — authentic
 The login screen below is a real capture. The rest are placeholders I will fill in as the public demo goes up.
 
 ### Landing Page
+
 <img width="1103" height="673" alt="image" src="https://github.com/user-attachments/assets/266935fe-d1f9-4728-916b-8674203e0800" />
-
-
 
 ### Login
 
-<img width="1049" height="739" alt="Student OS login screen" src="https://github.com/user-attachments/assets/cdf2e04a-2790-4a68-b109-f60465c5fcc8" />
+<img width="1058" height="660" alt="image" src="https://github.com/user-attachments/assets/41a2a4cf-15b5-423e-b7f3-8e6582fe7aba" />
+
 
 ### Dashboard
 
-_Screenshot placeholder_
+<img width="1905" height="942" alt="image" src="https://github.com/user-attachments/assets/dc922c29-f464-42ca-a35f-695135190e33" />
+
 
 ### Courses
 
-_Screenshot placeholder_
+<img width="1909" height="809" alt="image" src="https://github.com/user-attachments/assets/708349c7-871e-4898-9133-212934dbe119" />
+
 
 ### Assignments
 
-_Screenshot placeholder_
+<img width="1919" height="789" alt="image" src="https://github.com/user-attachments/assets/adc44695-d0b4-40ce-90a1-cc2d5e5389a8" />
+
 
 ### Notes
 
-_Screenshot placeholder_
+<img width="1917" height="786" alt="image" src="https://github.com/user-attachments/assets/b7a92136-0ae5-4399-ae68-ff9b9e685cee" />
+
 
 ### Schedule
 
-_Screenshot placeholder_
+<img width="1919" height="849" alt="image" src="https://github.com/user-attachments/assets/00fe9f30-29e7-4774-a30e-101da26bd0f4" />
+
 
 ### Expenses
 
-_Screenshot placeholder_
+<img width="1919" height="810" alt="image" src="https://github.com/user-attachments/assets/61e44a9c-af9d-4b37-8035-39b8ccf39498" />
+
 
 ### Analytics
 
-_Screenshot placeholder_
+<img width="1918" height="805" alt="image" src="https://github.com/user-attachments/assets/842616f3-ac75-487e-9dee-43f39e687688" />
+
 
 ### Reports
 
-_Screenshot placeholder_
+<img width="1919" height="854" alt="image" src="https://github.com/user-attachments/assets/587313b5-f450-4cb6-8458-edeaf5175e8c" />
+
 
 ## Tech Stack
 
