@@ -1,6 +1,8 @@
 # Student OS
 
-**Student OS** is a premium student productivity platform for college students. It brings academic planning and personal finance into one calm workspace inspired by Apple, Linear, Notion, and Arc.
+**Student OS** is a modern productivity platform for college students. It brings courses, coursework, notes, schedules, and personal finances into one workspace, so you spend less time switching between tools and more time on actual work.
+
+It started as a way to practice building a complete full-stack app — authentication, database design, and a real UI — and grew into something I use for my own semester.
 
 **Live Demo:** _Coming soon_
 
@@ -8,25 +10,30 @@
 
 ## Features
 
-- Credentials and Google authentication with protected routes and sessions
-- Multi-currency money display (PHP, USD, EUR, JPY) driven by a saved user preference
-- Course management with PostgreSQL persistence
-- Assignment CRUD, filters, priorities, completion states, and dashboard integration
-- Personal and course-specific notes with pinning and search
-- Weekly Monday-to-Sunday schedule with conflict detection
-- Income, expense, category, and monthly budget management
-- Analytics across academic progress, productivity, and finance
-- Unified search across every implemented module
-- Profile, password, theme, export, and account controls
-- Responsive mobile-first layout with carefully designed dark mode
+- **Landing page** with an overview of the product, feature list, FAQ, and sign-up entry points
+- **Authentication** with email and password, plus optional Google Sign In
+- **Courses** for tracking course codes, instructors, rooms, semesters, and credits
+- **Assignments** with priorities, statuses, due dates, filters, and completion tracking
+- **Notes** with pinning, course links, and instant search
+- **Schedule** with a Monday-to-Sunday timetable and overlapping-event detection
+- **Expenses** with income and expense categories, monthly summaries, and breakdowns
+- **Analytics** covering academic progress, productivity, and monthly finance
+- **Reports** as a printable summary with JSON and CSV export
+- **Search** across courses, assignments, notes, schedule events, and expenses
+- **Themes** using system, light, and dark modes that persist between visits
+- **Currency** support for PHP, USD, EUR, and JPY, applied across every money display
 
 ## Screenshots
 
-Screenshots can be added as the project is prepared for its public demo.
+The login screen below is a real capture. The rest are placeholders I will fill in as the public demo goes up.
+
+### Landing Page
+
+_Screenshot placeholder_
 
 ### Login
 
-<img width="1049" height="739" alt="image" src="https://github.com/user-attachments/assets/cdf2e04a-2790-4a68-b109-f60465c5fcc8" />
+<img width="1049" height="739" alt="Student OS login screen" src="https://github.com/user-attachments/assets/cdf2e04a-2790-4a68-b109-f60465c5fcc8" />
 
 ### Dashboard
 
@@ -56,37 +63,47 @@ _Screenshot placeholder_
 
 _Screenshot placeholder_
 
+### Reports
+
+_Screenshot placeholder_
+
 ## Tech Stack
 
-- Next.js App Router
-- React and TypeScript
-- Tailwind CSS
-- Prisma ORM
-- PostgreSQL
-- Auth.js / NextAuth credentials authentication
-- React Hook Form and Zod
-- next-themes
-- Lucide React
+- **Next.js** (App Router) with React and TypeScript
+- **Tailwind CSS** for styling
+- **Prisma ORM** with **PostgreSQL**
+- **Auth.js / NextAuth** for sessions, backed by the Prisma adapter
+- **React Hook Form** and **Zod** for forms and validation
+- **next-themes** for theme handling
+- **Lucide React** for icons
 
-## Architecture
-
-The project uses a feature-first structure:
+## Project Structure
 
 ```text
-app/          Routes, layouts, pages, and API handlers
-components/   Shared UI, layout, providers, and auth components
-features/     Domain modules: courses, assignments, notes, schedule, expenses
-lib/          Prisma client and reusable server data helpers
-prisma/       Schema and migrations
-hooks/        Reusable client-side behavior
-types/        Shared TypeScript organization
+app/           Routes, layouts, and API handlers
+  api/         Auth, and one handler group per module
+components/    Shared UI, layout, brand, providers, and auth components
+  auth/        Login, register, and Google sign-in components
+  brand/       Reusable logo and monogram
+  layout/      App shell, sidebar, top navigation, theme toggle
+  providers/   Session, theme, and currency context
+  ui/          Button, card, input, badge, password input
+features/      Domain modules, one folder per product area
+  landing/     Public landing page
+  dashboard/   Overview page and its widgets
+  courses/  assignments/  notes/  schedule/  expenses/
+  analytics/  reports/  search/  settings/
+lib/           Prisma client, currency formatting, server data helpers
+prisma/        Schema and migration history
+hooks/         Client-side hooks (mobile nav, focus trap, currency)
+types/         Shared TypeScript types
 ```
 
-Server Components are the default. Client Components are used for interaction-heavy surfaces such as forms, filters, search, theme controls, and dialogs.
+Server Components are the default. Client Components are used only where interaction is required, such as forms, filters, search, theme controls, and dialogs. Business logic lives in `features/` and `lib/` rather than inside page files.
 
 ## Installation
 
-Requirements: Node.js, npm, and PostgreSQL locally, or a Neon PostgreSQL database.
+You need Node.js, npm, and either a local PostgreSQL server or a hosted one such as Neon.
 
 ```bash
 git clone https://github.com/Kermighty/student-os.git
@@ -94,63 +111,80 @@ cd student-os
 npm install
 ```
 
-Copy `.env.example` to `.env`, add valid values, then run:
+Copy `.env.example` to `.env`, fill in the values described below, then run the migration and start the dev server:
 
 ```bash
 npx prisma migrate dev
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000). Signed-out visitors see the landing page; signed-in users are taken to `/dashboard`.
 
-Useful commands:
+Other commands:
 
 ```bash
-npm run lint
-npm run build
-npm run db:generate
-npm run db:deploy
-npx prisma studio
+npm run lint        # ESLint
+npm run build       # production build
+npm run db:generate # regenerate the Prisma client
+npm run db:deploy   # apply migrations without prompts
+npx prisma studio   # browse the database
 ```
 
 ## Environment
 
-`.env.example` documents the required deployment variables:
+`.env.example` lists every variable the app reads.
 
 | Variable | Purpose |
 |---|---|
-| `DATABASE_URL` | PostgreSQL connection string for local PostgreSQL or Neon |
-| `AUTH_SECRET` | Long random secret used by Auth.js sessions |
-| `NEXTAUTH_URL` | Public application URL, such as `http://localhost:3000` or the Vercel URL |
-| `NEXTAUTH_SECRET` | Compatibility alias for deployments that still expect the NextAuth name |
-| `GOOGLE_CLIENT_ID` | Optional OAuth 2.0 client ID that enables “Continue with Google” |
-| `GOOGLE_CLIENT_SECRET` | Optional OAuth 2.0 client secret paired with the client ID |
+| `DATABASE_URL` | PostgreSQL connection string, for local Postgres or Neon |
+| `AUTH_SECRET` | Random secret used to sign Auth.js sessions |
+| `NEXTAUTH_URL` | Public URL of the app, such as `http://localhost:3000` |
+| `NEXTAUTH_SECRET` | Alias kept for deployments that still expect the NextAuth name |
+| `GOOGLE_CLIENT_ID` | OAuth client ID, only needed if you want Google Sign In |
+| `GOOGLE_CLIENT_SECRET` | OAuth client secret that pairs with the client ID |
 
-Never commit `.env`, `.env.local`, database credentials, or secrets.
+Google Sign In is optional. If `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` are missing, the Google button is hidden and email/password sign-in continues to work normally.
+
+When creating the Google OAuth client, add this authorized redirect URI:
+
+```text
+http://localhost:3000/api/auth/callback/google
+```
+
+Never commit `.env`, `.env.local`, database credentials, or any secret. `.env*` is already ignored except `.env.example`.
 
 ## Deployment
 
-### Neon
+### Database (Neon)
 
-1. Create a free Neon project and PostgreSQL database.
-2. Copy the pooled connection string into Vercel as `DATABASE_URL`.
-3. Keep the Prisma migration history in the repository.
+1. Create a free project and PostgreSQL database on [Neon](https://neon.tech).
+2. Copy the pooled connection string — that is the one to use with serverless hosting.
+3. Keep the Prisma migration history in the repository so deploys can apply it.
 
-### Vercel Hobby
+### Vercel
 
-1. Import the GitHub repository into Vercel.
-2. Select the Next.js framework preset.
-3. Add `DATABASE_URL`, `AUTH_SECRET`, and `NEXTAUTH_URL` under Project Settings → Environment Variables.
-4. Set `NEXTAUTH_URL` to the deployed Vercel URL.
-5. Use the repository's `vercel-build` command, which runs `prisma generate`, `prisma migrate deploy`, and `next build`.
-6. Deploy without committing secrets or changing Prisma migration history.
+1. Import the GitHub repository into Vercel and keep the Next.js framework preset.
+2. Add `DATABASE_URL`, `AUTH_SECRET`, and `NEXTAUTH_URL` under **Project Settings → Environment Variables**.
+3. Set `NEXTAUTH_URL` to your deployed Vercel URL, and add the matching Google redirect URI if you enabled Google Sign In.
+4. Use the repository's `vercel-build` script, which runs `prisma generate`, `prisma migrate deploy`, and `next build`.
 
-The project uses only free/open-source runtime dependencies and does not require paid services.
+Everything here runs on free tiers. No paid services are required.
 
-## Open Source
+## Versions
 
-Student OS is released under the [MIT License](LICENSE). Contributions should follow [CONTRIBUTING.md](CONTRIBUTING.md) and the project's [Code of Conduct](CODE_OF_CONDUCT.md).
+| Version | Scope |
+|---|---|
+| **v1.0** | Core platform — courses, assignments, notes, schedule, expenses, analytics, search, and settings |
+| **v1.1** | Google authentication and multi-currency support (PHP, USD, EUR, JPY) |
+| **v1.2** | Public landing page, with the dashboard moved to `/dashboard` |
+| **v1.2.1** | Branding and UI polish — reusable monogram, favicon, and a theme toggle on the landing page |
+
+## Contributing
+
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and workflow notes, and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community expectations.
 
 ## License
+
+Released under the [MIT License](LICENSE).
 
 MIT © Kermighty
