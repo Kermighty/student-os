@@ -256,7 +256,16 @@ The following models are **planned** and are not implemented in the current data
 - Kept the existing next-themes setup (`defaultTheme="system"`, `enableSystem`) so system mode follows the device and explicit choices persist after refresh.
 - Verified routing, currency preference, mobile navigation, theme persistence, and layouts at 390px, 430px, 768px, and desktop at runtime.
 
+### Sprint 12.1 — Branding Polish
+- Replaced the temporary "SO" text badge with a premium Student OS monogram: a rounded-square tile with the brand blue gradient (`#3b82f6` → `#1d4ed8`) and a clean, optically centered "SO" letterpair drawn as inline SVG.
+- Added `BrandMark` and `BrandLockup` as shared components in `components/brand/`, used by the landing navbar and footer, the sidebar, the mobile navigation drawer, and both auth pages.
+- Replaced the generic `favicon.ico` with a generated `app/icon.tsx` route that renders the same brand tile, and pointed the layout metadata at it.
+- Added the existing `ThemeToggle` to the landing page navbar, placed directly beside Sign in, reusing the single next-themes implementation with no duplicated logic.
+- Verified the monogram renders legibly from 36px to 180px, keeps contrast in both themes, and that theme switching on the landing page applies instantly and persists after reload.
+
 ## Current State
+Sprint 12.1 is complete.
+
 Sprint 12 is complete.
 
 The public landing page lives at `/` and the authenticated workspace lives at `/dashboard`. Sprint 11 is complete.
@@ -281,6 +290,7 @@ Google authentication activates as soon as `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT
 | 10 Polish & Deployment | Complete |
 | 11 Multi-Currency, Google Auth & Finalization | Complete |
 | 12 Landing Page & Final Premium Polish | Complete |
+| 12.1 Branding Polish | Complete |
 
 ## Engineering Standards
 

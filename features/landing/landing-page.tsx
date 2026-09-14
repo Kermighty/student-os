@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 
 import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/features/landing/logo";
 
@@ -74,12 +75,13 @@ export function LandingPage({ hasGoogleProvider }: { hasGoogleProvider: boolean 
             <a href="#faq" className="transition hover:text-slate-900 dark:hover:text-white">FAQ</a>
           </nav>
           <div className="flex items-center gap-2">
-            <Link href="/login" className="rounded-xl px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">
+            <Link href="/login" className="hidden rounded-xl px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white sm:inline-flex">
               Sign in
             </Link>
             <Link href="/register">
               <Button size="sm">Get Started</Button>
             </Link>
+            <ThemeToggle />
           </div>
         </div>
       </header>

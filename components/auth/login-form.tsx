@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
+import { BrandMark } from "@/components/brand/brand-mark";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -61,6 +62,11 @@ export function LoginForm({ hasGoogleProvider = false }: { hasGoogleProvider?: b
   return (
     <main className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-12 dark:bg-slate-950">
       <div className="w-full max-w-md">
+        <div className="mb-6 flex justify-center">
+          <Link href="/" aria-label="Student OS home">
+            <BrandMark size={48} />
+          </Link>
+        </div>
         <PageHeader
           title="Welcome back"
           description="Sign in to continue managing your student life."

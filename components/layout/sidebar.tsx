@@ -1,17 +1,13 @@
 import Link from "next/link";
+
+import { BrandLockup } from "@/components/brand/brand-mark";
 import { navigationItems } from "@/components/layout/navigation";
 
 export function Sidebar({ courseCount = 0 }: { courseCount?: number }) {
   return (
     <aside className="hidden h-full w-72 shrink-0 border-r border-slate-200/80 bg-white/80 p-5 backdrop-blur-xl md:flex md:flex-col dark:border-slate-800 dark:bg-[#0b1220]/80">
-      <div className="mb-8 flex items-center gap-3 px-2">
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-sm font-semibold text-white shadow-sm shadow-blue-500/30">
-          SO
-        </div>
-        <div>
-          <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Student OS</p>
-          <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">Life dashboard</p>
-        </div>
+      <div className="mb-8 px-2">
+        <BrandLockup />
       </div>
 
       <nav className="space-y-1.5">

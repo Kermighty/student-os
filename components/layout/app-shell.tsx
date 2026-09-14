@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { X } from "lucide-react";
 
+import { BrandMark } from "@/components/brand/brand-mark";
 import { Button } from "@/components/ui/button";
 import { Sidebar } from "@/components/layout/sidebar";
 import { TopNav } from "@/components/layout/top-nav";
@@ -26,9 +27,7 @@ export function AppShell({ children, courseCount = 0, currency = DEFAULT_CURRENC
           <div className="h-full w-[82%] max-w-xs bg-white p-4 shadow-2xl dark:bg-[#0b1220]">
             <div className="mb-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-600 text-xs font-semibold text-white">
-                  SO
-                </div>
+                <BrandMark size={32} />
                 <div>
                   <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Student OS</p>
                   <p className="text-sm font-semibold">Navigation</p>

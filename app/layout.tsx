@@ -37,7 +37,8 @@ export const metadata: Metadata = {
     description: "A premium productivity platform for college students.",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [{ url: "/icon", type: "image/png", sizes: "48x48" }],
+    apple: [{ url: "/icon", type: "image/png", sizes: "48x48" }],
   },
 };
 
