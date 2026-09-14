@@ -4,7 +4,7 @@
 
 It started as a way to practice building a complete full-stack app — authentication, database design, and a real UI — and grew into something I use for my own semester.
 
-**Live Demo:** _Coming soon_
+**Live Demo:** https://your-app.vercel.app
 
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/) [![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?logo=prisma)](https://www.prisma.io/) [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?logo=postgresql)](https://www.postgresql.org/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -28,8 +28,9 @@ It started as a way to practice building a complete full-stack app — authentic
 The login screen below is a real capture. The rest are placeholders I will fill in as the public demo goes up.
 
 ### Landing Page
+<img width="1103" height="673" alt="image" src="https://github.com/user-attachments/assets/266935fe-d1f9-4728-916b-8674203e0800" />
 
-_Screenshot placeholder_
+
 
 ### Login
 
