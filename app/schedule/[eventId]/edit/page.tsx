@@ -18,5 +18,5 @@ export default async function EditSchedulePage({ params }: { params: Promise<{ e
     prisma.course.findMany({ where: { userId: session.user.id }, select: { id: true, courseCode: true, title: true, color: true }, orderBy: { courseCode: "asc" } }),
   ]);
   if (!event) notFound();
-  return <AppShell><div className="space-y-6"><PageHeader title="Edit event" description="Keep your weekly rhythm accurate and conflict-free." /><ScheduleForm courses={courses} mode="edit" eventId={event.id} defaultValues={{ courseId: event.courseId ?? "", title: event.title, eventType: event.eventType, dayOfWeek: event.dayOfWeek, startTime: event.startTime, endTime: event.endTime, location: event.location, color: event.color as "blue" | "emerald" | "rose" | "violet" }} /></div></AppShell>;
+  return <AppShell userId={session.user.id}><div className="space-y-6"><PageHeader title="Edit event" description="Keep your weekly rhythm accurate and conflict-free." /><ScheduleForm courses={courses} mode="edit" eventId={event.id} defaultValues={{ courseId: event.courseId ?? "", title: event.title, eventType: event.eventType, dayOfWeek: event.dayOfWeek, startTime: event.startTime, endTime: event.endTime, location: event.location, color: event.color as "blue" | "emerald" | "rose" | "violet" }} /></div></AppShell>;
 }

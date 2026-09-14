@@ -20,5 +20,5 @@ export default async function EditAssignmentPage({ params }: { params: Promise<{
   ]);
   if (!assignment) notFound();
 
-  return <AppShell><div className="space-y-6"><PageHeader title="Edit assignment" description="Keep the details and deadline aligned with your actual plan." /><AssignmentForm courses={courses} mode="edit" assignmentId={assignment.id} defaultValues={{ courseId: assignment.courseId, title: assignment.title, description: assignment.description, dueDate: formatDateTimeLocal(assignment.dueDate), priority: assignment.priority, status: assignment.status }} /></div></AppShell>;
+  return <AppShell userId={session.user.id}><div className="space-y-6"><PageHeader title="Edit assignment" description="Keep the details and deadline aligned with your actual plan." /><AssignmentForm courses={courses} mode="edit" assignmentId={assignment.id} defaultValues={{ courseId: assignment.courseId, title: assignment.title, description: assignment.description, dueDate: formatDateTimeLocal(assignment.dueDate), priority: assignment.priority, status: assignment.status }} /></div></AppShell>;
 }

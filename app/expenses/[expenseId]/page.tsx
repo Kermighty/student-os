@@ -16,5 +16,5 @@ export default async function ExpenseDetailPage({ params }: { params: Promise<{ 
   const expense = await prisma.expense.findFirst({ where: { id: (await params).expenseId, userId: session.user.id }, include: { category: true } });
   if (!expense) notFound();
   const { currency } = await getWorkspaceSnapshot(session.user.id);
-  return <AppShell><ExpenseDetail expense={serializeExpense(expense)} currency={currency} /></AppShell>;
+  return <AppShell userId={session.user.id}><ExpenseDetail expense={serializeExpense(expense)} currency={currency} /></AppShell>;
 }

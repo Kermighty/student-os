@@ -13,5 +13,5 @@ export default async function ScheduleDetailPage({ params }: { params: Promise<{
   if (!session?.user?.id) redirect("/login");
   const event = await prisma.scheduleEvent.findFirst({ where: { id: (await params).eventId, userId: session.user.id }, include: { course: { select: { id: true, courseCode: true, title: true, color: true } } } });
   if (!event) notFound();
-  return <AppShell><ScheduleDetail event={{ ...event, createdAt: event.createdAt.toISOString(), updatedAt: event.updatedAt.toISOString() }} /></AppShell>;
+  return <AppShell userId={session.user.id}><ScheduleDetail event={{ ...event, createdAt: event.createdAt.toISOString(), updatedAt: event.updatedAt.toISOString() }} /></AppShell>;
 }

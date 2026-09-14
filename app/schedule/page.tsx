@@ -15,5 +15,5 @@ export default async function SchedulePage() {
     prisma.scheduleEvent.findMany({ where: { userId: session.user.id }, include: { course: { select: { id: true, courseCode: true, title: true, color: true } } }, orderBy: [{ dayOfWeek: "asc" }, { startTime: "asc" }] }),
     prisma.course.findMany({ where: { userId: session.user.id }, select: { id: true, courseCode: true, title: true, color: true }, orderBy: { courseCode: "asc" } }),
   ]);
-  return <AppShell><ScheduleCalendar initialEvents={events.map((event) => ({ ...event, createdAt: event.createdAt.toISOString(), updatedAt: event.updatedAt.toISOString() }))} courses={courses} /></AppShell>;
+  return <AppShell userId={session.user.id}><ScheduleCalendar initialEvents={events.map((event) => ({ ...event, createdAt: event.createdAt.toISOString(), updatedAt: event.updatedAt.toISOString() }))} courses={courses} /></AppShell>;
 }

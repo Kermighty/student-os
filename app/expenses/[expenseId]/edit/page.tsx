@@ -21,5 +21,5 @@ export default async function EditExpensePage({ params }: { params: Promise<{ ex
   ]);
   if (!expense) notFound();
   const serialized = serializeExpense(expense);
-  return <AppShell><div className="space-y-6"><PageHeader title="Edit transaction" description="Keep your money history accurate and useful." /><ExpenseForm categories={categories.map((category) => ({ ...category, createdAt: category.createdAt.toISOString() }))} mode="edit" expenseId={expense.id} defaultValues={{ categoryId: expense.categoryId, title: expense.title, amount: serialized.amount, type: expense.type, transactionDate: formatDateInput(expense.transactionDate), paymentMethod: expense.paymentMethod, notes: expense.notes }} /></div></AppShell>;
+  return <AppShell userId={session.user.id}><div className="space-y-6"><PageHeader title="Edit transaction" description="Keep your money history accurate and useful." /><ExpenseForm categories={categories.map((category) => ({ ...category, createdAt: category.createdAt.toISOString() }))} mode="edit" expenseId={expense.id} defaultValues={{ categoryId: expense.categoryId, title: expense.title, amount: serialized.amount, type: expense.type, transactionDate: formatDateInput(expense.transactionDate), paymentMethod: expense.paymentMethod, notes: expense.notes }} /></div></AppShell>;
 }

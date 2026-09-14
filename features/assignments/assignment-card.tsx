@@ -16,9 +16,11 @@ export function AssignmentCard({ assignment, onStatusChange }: { assignment: Ass
       <div className={`absolute inset-y-0 left-0 w-1.5 ${courseColorClasses[assignment.course.color] ?? "bg-blue-500"}`} aria-hidden="true" />
       <div className="p-5 pl-7">
         <div className="flex items-start gap-4">
-          <label className="mt-1 flex h-6 w-6 shrink-0 cursor-pointer items-center justify-center rounded-full border border-slate-300 bg-white transition hover:border-blue-500 dark:border-slate-700 dark:bg-slate-950" title={completed ? "Mark as to do" : "Mark complete"}>
-            <input type="checkbox" checked={completed} onChange={() => onStatusChange(completed ? "TODO" : "COMPLETED")} className="sr-only" aria-label={`${completed ? "Mark" : "Complete"} ${assignment.title}`} />
-            <Check className={`h-3.5 w-3.5 transition ${completed ? "text-blue-600" : "text-transparent"}`} strokeWidth={3} />
+          <label className="-ml-2 flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full" title={completed ? "Mark as to do" : "Mark complete"}>
+            <input type="checkbox" checked={completed} onChange={() => onStatusChange(completed ? "TODO" : "COMPLETED")} className="peer sr-only" aria-label={`${completed ? "Mark" : "Complete"} ${assignment.title}`} />
+            <span className="flex h-6 w-6 items-center justify-center rounded-full border-slate-300 bg-white transition hover:border-blue-500 peer-focus-visible:ring-2 peer-focus-visible:ring-blue-500 peer-focus-visible:ring-offset-2 dark:border-slate-700 dark:bg-slate-950">
+              <Check className={`h-3.5 w-3.5 transition ${completed ? "text-blue-600" : "text-transparent"}`} strokeWidth={3} />
+            </span>
           </label>
 
           <div className="min-w-0 flex-1">
@@ -27,7 +29,10 @@ export function AssignmentCard({ assignment, onStatusChange }: { assignment: Ass
               <PriorityBadge priority={assignment.priority} />
               <StatusBadge status={assignment.status} />
             </div>
-            <Link href={`/assignments/${assignment.id}`} className="mt-2 block text-lg font-semibold text-slate-900 hover:text-blue-600 dark:text-white dark:hover:text-blue-300">
+            <Link
+              href={`/assignments/${assignment.id}`}
+              className="mt-2 -mx-2 block rounded-lg px-2 py-2.5 text-lg font-semibold leading-snug text-slate-900 transition hover:text-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:text-white dark:hover:text-blue-300"
+            >
               {assignment.title}
             </Link>
             <p className="mt-2 line-clamp-2 text-sm leading-6 text-slate-600 dark:text-slate-300">{assignment.description || "No description added."}</p>

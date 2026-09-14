@@ -13,5 +13,5 @@ export default async function NoteDetailPage({ params }: { params: Promise<{ not
   if (!session?.user?.id) redirect("/login");
   const note = await prisma.note.findFirst({ where: { id: (await params).noteId, userId: session.user.id }, include: { course: { select: { id: true, courseCode: true, title: true, color: true } } } });
   if (!note) notFound();
-  return <AppShell><NoteDetail note={{ ...note, createdAt: note.createdAt.toISOString(), updatedAt: note.updatedAt.toISOString() }} /></AppShell>;
+  return <AppShell userId={session.user.id}><NoteDetail note={{ ...note, createdAt: note.createdAt.toISOString(), updatedAt: note.updatedAt.toISOString() }} /></AppShell>;
 }

@@ -6,9 +6,9 @@ import { authOptions } from "@/auth";
 import { CourseCard } from "@/features/courses/course-card";
 import { CourseEmptyState } from "@/features/courses/course-empty-state";
 import { prisma } from "@/lib/prisma";
-import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/ui/page-header";
 import Link from "next/link";
+import { Plus } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -25,14 +25,18 @@ export default async function CoursesPage() {
   });
 
   return (
-    <AppShell>
+    <AppShell userId={session.user.id}>
       <div className="space-y-6">
         <PageHeader
           title="Courses"
           description="Manage your semester and keep your academic foundation organized."
           action={
-            <Link href="/courses/new">
-              <Button type="button">Add course</Button>
+            <Link
+              href="/courses/new"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 text-sm font-medium text-white shadow-sm shadow-blue-500/20 transition duration-200 hover:-translate-y-0.5 hover:bg-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 active:translate-y-0 active:scale-[0.98]"
+            >
+              <Plus className="h-4 w-4" />
+              Add course
             </Link>
           }
         />

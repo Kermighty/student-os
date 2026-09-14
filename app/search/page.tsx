@@ -8,5 +8,5 @@ import { GlobalSearch } from "@/features/search/global-search";
 export default async function SearchPage() {
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) redirect("/login");
-  return <AppShell><GlobalSearch /></AppShell>;
+  return <AppShell userId={session.user.id}><GlobalSearch /></AppShell>;
 }

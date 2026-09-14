@@ -17,5 +17,5 @@ export default async function EditNotePage({ params }: { params: Promise<{ noteI
     prisma.course.findMany({ where: { userId: session.user.id }, select: { id: true, courseCode: true, title: true, color: true }, orderBy: { courseCode: "asc" } }),
   ]);
   if (!note) notFound();
-  return <AppShell><div className="space-y-6"><PageHeader title="Edit note" description="Refine your thinking and keep the important details close." /><NoteForm courses={courses} mode="edit" noteId={note.id} defaultValues={{ courseId: note.courseId ?? "", title: note.title, content: note.content, pinned: note.pinned }} /></div></AppShell>;
+  return <AppShell userId={session.user.id}><div className="space-y-6"><PageHeader title="Edit note" description="Refine your thinking and keep the important details close." /><NoteForm courses={courses} mode="edit" noteId={note.id} defaultValues={{ courseId: note.courseId ?? "", title: note.title, content: note.content, pinned: note.pinned }} /></div></AppShell>;
 }

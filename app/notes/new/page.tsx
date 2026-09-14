@@ -13,5 +13,5 @@ export default async function NewNotePage() {
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) redirect("/login");
   const courses = await prisma.course.findMany({ where: { userId: session.user.id }, select: { id: true, courseCode: true, title: true, color: true }, orderBy: { courseCode: "asc" } });
-  return <AppShell><div className="space-y-6"><PageHeader title="New note" description="Make space for the idea, insight, or detail you want to keep." /><NoteForm courses={courses} mode="create" /></div></AppShell>;
+  return <AppShell userId={session.user.id}><div className="space-y-6"><PageHeader title="New note" description="Make space for the idea, insight, or detail you want to keep." /><NoteForm courses={courses} mode="create" /></div></AppShell>;
 }

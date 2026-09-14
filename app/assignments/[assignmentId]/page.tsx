@@ -15,5 +15,5 @@ export default async function AssignmentDetailPage({ params }: { params: Promise
   const assignment = await prisma.assignment.findFirst({ where: { id: assignmentId, userId: session.user.id }, include: { course: true } });
   if (!assignment) notFound();
 
-  return <AppShell><AssignmentDetail assignment={{ ...assignment, dueDate: assignment.dueDate.toISOString(), createdAt: assignment.createdAt.toISOString(), updatedAt: assignment.updatedAt.toISOString() }} /></AppShell>;
+  return <AppShell userId={session.user.id}><AssignmentDetail assignment={{ ...assignment, dueDate: assignment.dueDate.toISOString(), createdAt: assignment.createdAt.toISOString(), updatedAt: assignment.updatedAt.toISOString() }} /></AppShell>;
 }

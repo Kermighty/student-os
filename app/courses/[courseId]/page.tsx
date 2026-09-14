@@ -25,7 +25,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ c
   }
 
   return (
-    <AppShell>
+    <AppShell userId={session.user.id}>
       <CourseDetail
         course={{
           id: course.id,

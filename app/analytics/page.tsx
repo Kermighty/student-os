@@ -13,5 +13,5 @@ export default async function AnalyticsPage() {
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) redirect("/login");
   const [data, snapshot] = await Promise.all([getAnalyticsData(session.user.id), getWorkspaceSnapshot(session.user.id)]);
-  return <AppShell><AnalyticsDashboard data={data} currency={snapshot.currency} /></AppShell>;
+  return <AppShell userId={session.user.id}><AnalyticsDashboard data={data} currency={snapshot.currency} /></AppShell>;
 }

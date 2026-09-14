@@ -10,11 +10,13 @@ const buttonVariants = {
   danger: "bg-red-600 text-white hover:bg-red-500",
 };
 
+// Heights target a 44px minimum touch target; `sm` and `icon` keep a compact
+// visual box but are padded out to a comfortable tap area on touch devices.
 const buttonSizes = {
-  default: "h-10 px-4 py-2 text-sm",
-  sm: "h-9 px-3 text-sm",
+  default: "h-11 px-4 py-2 text-sm",
+  sm: "h-11 px-3 text-sm",
   lg: "h-11 px-5 text-base",
-  icon: "h-10 w-10",
+  icon: "h-11 w-11",
 };
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

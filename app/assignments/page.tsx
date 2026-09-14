@@ -17,5 +17,5 @@ export default async function AssignmentsPage() {
     prisma.course.findMany({ where: { userId: session.user.id }, select: { id: true, courseCode: true, title: true, color: true }, orderBy: { courseCode: "asc" } }),
   ]);
 
-  return <AppShell><AssignmentOverview initialAssignments={assignments.map((assignment) => ({ ...assignment, dueDate: assignment.dueDate.toISOString(), createdAt: assignment.createdAt.toISOString(), updatedAt: assignment.updatedAt.toISOString() }))} courses={courses} /></AppShell>;
+  return <AppShell userId={session.user.id}><AssignmentOverview initialAssignments={assignments.map((assignment) => ({ ...assignment, dueDate: assignment.dueDate.toISOString(), createdAt: assignment.createdAt.toISOString(), updatedAt: assignment.updatedAt.toISOString() }))} courses={courses} /></AppShell>;
 }

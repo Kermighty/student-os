@@ -11,5 +11,5 @@ export const dynamic = "force-dynamic";
 export default async function ReportsPage() {
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) redirect("/login");
-  return <AppShell><ReportsWorkspace data={await getReportsData(session.user.id)} accountName={session.user.name ?? "Student"} /></AppShell>;
+  return <AppShell userId={session.user.id}><ReportsWorkspace data={await getReportsData(session.user.id)} accountName={session.user.name ?? "Student"} /></AppShell>;
 }

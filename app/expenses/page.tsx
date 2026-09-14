@@ -17,5 +17,5 @@ export default async function ExpensesPage() {
     prisma.expense.findMany({ where: { userId: session.user.id }, include: { category: true }, orderBy: { transactionDate: "desc" } }),
     prisma.expenseCategory.findMany({ where: { userId: session.user.id }, orderBy: { name: "asc" } }),
   ]);
-  return <AppShell><ExpenseOverview initialExpenses={expenses.map(serializeExpense)} initialCategories={categories.map((category) => ({ ...category, createdAt: category.createdAt.toISOString() }))} /></AppShell>;
+  return <AppShell userId={session.user.id}><ExpenseOverview initialExpenses={expenses.map(serializeExpense)} initialCategories={categories.map((category) => ({ ...category, createdAt: category.createdAt.toISOString() }))} /></AppShell>;
 }

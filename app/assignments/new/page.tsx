@@ -14,5 +14,5 @@ export default async function NewAssignmentPage() {
   if (!session?.user?.id) redirect("/login");
   const courses = await prisma.course.findMany({ where: { userId: session.user.id }, select: { id: true, courseCode: true, title: true, color: true }, orderBy: { courseCode: "asc" } });
 
-  return <AppShell><div className="space-y-6"><PageHeader title="New assignment" description="Capture the next piece of work before it gets lost in the semester." /><AssignmentForm courses={courses} mode="create" /></div></AppShell>;
+  return <AppShell userId={session.user.id}><div className="space-y-6"><PageHeader title="New assignment" description="Capture the next piece of work before it gets lost in the semester." /><AssignmentForm courses={courses} mode="create" /></div></AppShell>;
 }

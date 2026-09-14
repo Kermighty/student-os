@@ -15,5 +15,5 @@ export default async function NotesPage() {
     prisma.note.findMany({ where: { userId: session.user.id }, include: { course: { select: { id: true, courseCode: true, title: true, color: true } } }, orderBy: [{ pinned: "desc" }, { updatedAt: "desc" }] }),
     prisma.course.findMany({ where: { userId: session.user.id }, select: { id: true, courseCode: true, title: true, color: true }, orderBy: { courseCode: "asc" } }),
   ]);
-  return <AppShell><NoteOverview initialNotes={notes.map((note) => ({ ...note, createdAt: note.createdAt.toISOString(), updatedAt: note.updatedAt.toISOString() }))} courses={courses} /></AppShell>;
+  return <AppShell userId={session.user.id}><NoteOverview initialNotes={notes.map((note) => ({ ...note, createdAt: note.createdAt.toISOString(), updatedAt: note.updatedAt.toISOString() }))} courses={courses} /></AppShell>;
 }

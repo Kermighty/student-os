@@ -263,7 +263,19 @@ The following models are **planned** and are not implemented in the current data
 - Added the existing `ThemeToggle` to the landing page navbar, placed directly beside Sign in, reusing the single next-themes implementation with no duplicated logic.
 - Verified the monogram renders legibly from 36px to 180px, keeps contrast in both themes, and that theme switching on the landing page applies instantly and persists after reload.
 
+### Sprint 12.3 (Redux) — Mobile UX & Performance
+- Added a full-width mobile bottom sheet for notifications, portalled to `body` so it escapes the sticky header's `backdrop-blur` containing block. Desktop keeps the anchored popover.
+- Removed the decorative, non-functional month chevrons from the dashboard mini calendar.
+- Rebuilt the Schedule mobile day selector as a 7-column grid so all Mon–Sun days fit a 390px viewport without horizontal scrolling, with today highlighted and 44px targets.
+- Eliminated a duplicate `getServerSession` call per navigation by passing `userId` from every page into `AppShellServer`, with the snapshot memoized per request via React `cache`.
+- Added prefetching to sidebar and mobile-drawer navigation links.
+- Raised dashboard section pills to a 44px minimum touch height, and gave the assignment title link and completion control proper mobile targets.
+- Fixed a `button` nested inside an `a` on the Courses page, which produced invalid markup and a 21px tap target.
+- Preserved the v1.2.4 server/client currency separation: Server Components continue to use `formatCurrency()` from `lib/currency.ts`, and `useCurrencyFormatter()` stays confined to Client Components.
+
 ## Current State
+Sprint 12.3 (Redux) is complete.
+
 Sprint 12.1 is complete.
 
 Sprint 12 is complete.
@@ -291,6 +303,8 @@ Google authentication activates as soon as `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT
 | 11 Multi-Currency, Google Auth & Finalization | Complete |
 | 12 Landing Page & Final Premium Polish | Complete |
 | 12.1 Branding Polish | Complete |
+| 12.3 Mobile UX & Performance | Complete |
+| 12.3 Mobile UX & Performance (Redux) | Complete |
 
 ## Engineering Standards
 

@@ -26,7 +26,7 @@ export default async function EditCoursePage({ params }: { params: Promise<{ cou
   }
 
   return (
-    <AppShell>
+    <AppShell userId={session.user.id}>
       <div className="space-y-6">
         <PageHeader
           title="Edit course"

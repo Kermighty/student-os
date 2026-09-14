@@ -8,5 +8,5 @@ import { SettingsPage } from "@/features/settings/settings-page";
 export default async function SettingsRoute() {
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) redirect("/login");
-  return <AppShell><SettingsPage user={{ name: session.user.name ?? "Student", email: session.user.email ?? "" }} /></AppShell>;
+  return <AppShell userId={session.user.id}><SettingsPage user={{ name: session.user.name ?? "Student", email: session.user.email ?? "" }} /></AppShell>;
 }

@@ -1,5 +1,3 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
-
 import { buildCalendarDates, calendarDays } from "@/features/dashboard/data";
 
 export function MiniCalendar() {
@@ -13,15 +11,6 @@ export function MiniCalendar() {
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">Calendar</p>
           <h3 className="mt-1 text-lg font-semibold text-slate-900 dark:text-white">{monthLabel}</h3>
-        </div>
-
-        <div className="flex items-center gap-1">
-          <button type="button" aria-label="Previous month" className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 transition hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800">
-            <ChevronLeft className="h-4 w-4" />
-          </button>
-          <button type="button" aria-label="Next month" className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 transition hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800">
-            <ChevronRight className="h-4 w-4" />
-          </button>
         </div>
       </div>
 

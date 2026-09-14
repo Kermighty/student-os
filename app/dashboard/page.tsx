@@ -36,7 +36,7 @@ export default async function DashboardRoute() {
   ]);
 
   return (
-    <AppShell>
+    <AppShell userId={session.user.id}>
       <DashboardPage
         name={session.user?.name ?? "Student"}
         assignmentSummary={{ pending: pendingAssignments, completed: completedAssignments }}

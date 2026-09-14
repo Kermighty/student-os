@@ -15,5 +15,5 @@ export default async function NewExpensePage() {
   if (!session?.user?.id) redirect("/login");
   await ensureBuiltInCategories(session.user.id);
   const categories = await prisma.expenseCategory.findMany({ where: { userId: session.user.id }, orderBy: { name: "asc" } });
-  return <AppShell><div className="space-y-6"><PageHeader title="New transaction" description="Record where your money went or what came in." /><ExpenseForm categories={categories.map((category) => ({ ...category, createdAt: category.createdAt.toISOString() }))} mode="create" /></div></AppShell>;
+  return <AppShell userId={session.user.id}><div className="space-y-6"><PageHeader title="New transaction" description="Record where your money went or what came in." /><ExpenseForm categories={categories.map((category) => ({ ...category, createdAt: category.createdAt.toISOString() }))} mode="create" /></div></AppShell>;
 }
