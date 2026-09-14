@@ -9,7 +9,7 @@ export default async function RegisterPage() {
   const session = await getServerSession(authOptions);
 
   if (session) {
-    redirect("/");
+    redirect("/dashboard");
   }
 
   return <RegisterForm hasGoogleProvider={isGoogleProviderEnabled()} />;

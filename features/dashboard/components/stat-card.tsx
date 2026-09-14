@@ -32,9 +32,9 @@ export function StatCard({ label, value, description, trend, icon, tone }: StatC
         </div>
       </div>
 
-      <div className="mt-auto flex items-end justify-between gap-3 pt-5">
-        <p className="text-xs text-slate-500 dark:text-slate-400">{description}</p>
-        <span className="shrink-0 rounded-full bg-slate-100 px-2 py-1 text-[10px] font-medium text-slate-500 dark:bg-slate-800 dark:text-slate-400">
+      <div className="mt-auto flex flex-wrap items-center justify-between gap-x-3 gap-y-2 pt-5">
+        <p className="min-w-0 text-xs leading-5 text-slate-500 dark:text-slate-400">{description}</p>
+        <span className="inline-flex max-w-full shrink-0 items-center whitespace-nowrap rounded-full bg-slate-100 px-2 py-1 text-[10px] font-medium text-slate-500 dark:bg-slate-800 dark:text-slate-400">
           {trend}
         </span>
       </div>

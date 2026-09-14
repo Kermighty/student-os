@@ -247,8 +247,19 @@ The following models are **planned** and are not implemented in the current data
 - Ignored `.vscode/` and `*.log`, and removed development-only log and verification files from the repository.
 - Verified ESLint, the production build, the credentials flow, the Google button gating, the persisted currency preference, mobile navigation, and the light/dark theme at runtime.
 
+### Sprint 12 — Public Landing Page & Final Premium Polish
+- Added a public landing page at `/` with hero, six feature cards, three value cards, real UI preview cards, three clearly-marked placeholder testimonials, a four-question FAQ, and a footer with GitHub, MIT License, and the 2026 copyright.
+- Moved the authenticated dashboard from `/` to `/dashboard` and made `/` redirect signed-in users to `/dashboard`.
+- Updated every redirect, sign-out callback, Google callback URL, and the sidebar Overview link to the new `/dashboard` route.
+- Fixed the dashboard stat-card footer so status badges wrap naturally instead of overlapping at 390px.
+- Refined the theme palette: a soft off-white light canvas (`#f7f8fb`) and a layered deep-navy dark theme (`#0b1220` surfaces) instead of near-black, with softer borders and muted secondary text.
+- Kept the existing next-themes setup (`defaultTheme="system"`, `enableSystem`) so system mode follows the device and explicit choices persist after refresh.
+- Verified routing, currency preference, mobile navigation, theme persistence, and layouts at 390px, 430px, 768px, and desktop at runtime.
+
 ## Current State
-Sprint 11 is complete.
+Sprint 12 is complete.
+
+The public landing page lives at `/` and the authenticated workspace lives at `/dashboard`. Sprint 11 is complete.
 
 Student OS is feature complete and prepared for a manual Vercel Hobby plus Neon PostgreSQL deployment. Deployment itself was intentionally not performed in this sprint.
 
@@ -269,6 +280,7 @@ Google authentication activates as soon as `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT
 | 09 Analytics | Complete |
 | 10 Polish & Deployment | Complete |
 | 11 Multi-Currency, Google Auth & Finalization | Complete |
+| 12 Landing Page & Final Premium Polish | Complete |
 
 ## Engineering Standards
 

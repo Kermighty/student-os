@@ -148,7 +148,7 @@ export function DashboardPage({ name, assignmentSummary, upcomingAssignments, re
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.7fr)_360px]">
         <div className="space-y-6">
-          <section className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-[0_18px_38px_rgba(15,23,42,0.04)] dark:border-slate-800 dark:bg-slate-900 sm:p-6">
+          <section className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-[0_18px_38px_rgba(15,23,42,0.04)] dark:border-slate-800 dark:bg-[#111a2b] sm:p-6">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Upcoming</p>
@@ -170,12 +170,12 @@ export function DashboardPage({ name, assignmentSummary, upcomingAssignments, re
             </div>
           </section>
 
-          <section className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-[0_18px_38px_rgba(15,23,42,0.04)] dark:border-slate-800 dark:bg-slate-900 sm:p-6">
+          <section className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-[0_18px_38px_rgba(15,23,42,0.04)] dark:border-slate-800 dark:bg-[#111a2b] sm:p-6">
             <div className="flex items-center justify-between gap-3"><div><p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Money flow</p><h2 className="mt-1 text-xl font-semibold text-slate-900 dark:text-white">Recent transactions</h2></div><div className="flex items-center gap-2"><Link href="/expenses/new" className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-medium text-white transition hover:-translate-y-0.5 hover:bg-blue-500 active:translate-y-0 active:scale-[0.98]"><Plus className="h-3.5 w-3.5" />Add</Link><Link href="/expenses" className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">Open expenses</Link></div></div>
             <div className="mt-5 space-y-3">{recentExpenses.length ? recentExpenses.map((expense) => <ExpensePreviewCard key={expense.id} expense={expense} />) : <EmptyState title="No transactions yet" description="Track your first income or expense to see your monthly balance at a glance." action={{ href: "/expenses/new", label: "Add expense" }} />}</div>
           </section>
 
-          <section className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-[0_18px_38px_rgba(15,23,42,0.04)] dark:border-slate-800 dark:bg-slate-900 sm:p-6">
+          <section className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-[0_18px_38px_rgba(15,23,42,0.04)] dark:border-slate-800 dark:bg-[#111a2b] sm:p-6">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Agenda</p>
@@ -191,7 +191,7 @@ export function DashboardPage({ name, assignmentSummary, upcomingAssignments, re
             </div>
           </section>
 
-          <section className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-[0_18px_38px_rgba(15,23,42,0.04)] dark:border-slate-800 dark:bg-slate-900 sm:p-6">
+          <section className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-[0_18px_38px_rgba(15,23,42,0.04)] dark:border-slate-800 dark:bg-[#111a2b] sm:p-6">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Workspace</p>
@@ -213,7 +213,7 @@ export function DashboardPage({ name, assignmentSummary, upcomingAssignments, re
         <aside className="space-y-6">
           <MiniCalendar />
 
-          <div className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-[0_18px_38px_rgba(15,23,42,0.04)] dark:border-slate-800 dark:bg-slate-900 sm:p-6">
+          <div className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-[0_18px_38px_rgba(15,23,42,0.04)] dark:border-slate-800 dark:bg-[#111a2b] sm:p-6">
             <div className="flex items-center justify-between gap-2">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Progress</p>

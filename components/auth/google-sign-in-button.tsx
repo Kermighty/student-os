@@ -29,7 +29,7 @@ export function GoogleSignInButton({ hasGoogleProvider, label = "Continue with G
       type="button"
       onClick={() => {
         setLoading(true);
-        void signIn("google", { callbackUrl: "/" });
+        void signIn("google", { callbackUrl: "/dashboard" });
       }}
       disabled={loading}
       className="inline-flex h-11 w-full items-center justify-center gap-3 rounded-xl border-slate-200 bg-white text-sm font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-60 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200 dark:hover:bg-slate-900"

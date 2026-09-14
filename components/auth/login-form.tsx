@@ -55,7 +55,7 @@ export function LoginForm({ hasGoogleProvider = false }: { hasGoogleProvider?: b
       return;
     }
 
-    router.push("/");
+    router.push("/dashboard");
   };
 
   return (

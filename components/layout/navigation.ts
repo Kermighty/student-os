@@ -2,7 +2,7 @@ import type { LucideIcon } from "lucide-react";
 import { CalendarRange, ChartNoAxesCombined, FileText, GraduationCap, LayoutGrid, NotebookPen, ScrollText, Search, Settings, Wallet } from "lucide-react";
 
 export const navigationItems: Array<{ href: string; label: string; icon: LucideIcon }> = [
-  { href: "/", label: "Overview", icon: LayoutGrid },
+  { href: "/dashboard", label: "Overview", icon: LayoutGrid },
   { href: "/courses", label: "Courses", icon: GraduationCap },
   { href: "/assignments", label: "Assignments", icon: FileText },
   { href: "/notes", label: "Notes", icon: NotebookPen },

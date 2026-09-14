@@ -16,14 +16,14 @@ export function AppShell({ children, courseCount = 0, currency = DEFAULT_CURRENC
 
   return (
     <CurrencyProvider initialCurrency={currency}>
-    <div className="flex min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50">
+    <div className="flex min-h-screen bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-[#0b1220] dark:text-slate-50">
       <div className="hidden md:block">
         <Sidebar courseCount={courseCount} />
       </div>
 
       {isOpen ? (
         <div className="fixed inset-0 z-30 bg-slate-950/60 md:hidden">
-          <div className="h-full w-[82%] max-w-xs bg-white p-4 shadow-2xl dark:bg-slate-950">
+          <div className="h-full w-[82%] max-w-xs bg-white p-4 shadow-2xl dark:bg-[#0b1220]">
             <div className="mb-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-600 text-xs font-semibold text-white">
